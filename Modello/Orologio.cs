@@ -53,6 +53,8 @@ namespace Scacchi.Modello
         public event EventHandler TempoScaduto;
 
         private const int tempoInizialeInMinuti = 5;
+        //Da implementare acceso = false dopo alcuni minuti di inattività
+        //probabilmente un tanto decantato evento
         private bool acceso = false;
         public void Accendi()
         {
