@@ -4,7 +4,7 @@ Applicazione che consentirà all'eterna sfida Bob VS Ross di avere luogo.
 ## Situazione attuale
 Dopo una breve pianificazione iniziale, abbiamo iniziato a modellare gli oggetti di una partita di scacchi usando delle `interface`. Dopo questa prima prototipazione, siamo passati ad implementare il comportamento della classe `Orologio`, che implementa `IOrologio`.
 
-## Obiettivo attuale
+## Obiettivo
 Aprire il file `Modello\Orologio.cs` e continuare con l'implementazione, provando a realizzare la specifica di un orologio per scacchi:
 1. Quando l'utente accende l'orologio, entrambi i tempi residui devono essere impostati su 5 minuti;
 2. Quando avvia l'orologio, il tempo inizierà a decrescere per il Giocatore1;
