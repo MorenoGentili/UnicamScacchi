@@ -53,8 +53,10 @@ namespace Scacchi.Modello
         public event EventHandler TempoScaduto;
 
         private const int tempoInizialeInMinuti = 5;
+        private bool acceso = false;
         public void Accendi()
         {
+            acceso = true;
             Reset();
         }
 
@@ -64,6 +66,9 @@ namespace Scacchi.Modello
         private bool paused = false;
         public void Avvia()
         {
+            if(!acceso)
+                throw new InvalidOperationException(
+                    "L'Orologio deve essere acceso, per poter essere avviato!");
             partenzaOrologio = DateTime.Now;
             paused = false;
         }
@@ -71,6 +76,17 @@ namespace Scacchi.Modello
         public void Pausa()
         {
             paused = true;
+        }
+
+        public void FineTurno() {
+            if(TurnoGiocatore == TurnoGiocatore.Giocatore1) {
+                tempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+                TurnoGiocatore = TurnoGiocatore.Giocatore2;
+            } else {
+                TempoResiduoGiocatore2 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+                TurnoGiocatore = TurnoGiocatore.Giocatore1;
+            }
+            Avvia();
         }
 
         public void Reset()
