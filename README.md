@@ -14,3 +14,6 @@ Continuare con l'implementazione, provando a realizzare la specifica di un orolo
 6. *Nice-to-have*: Se si prova ad avviare l'orologio senza averlo prima acceso, deve essere sollevata un'eccezione (es.  `throw new InvalidOperationException("Prima devi accenderlo");`). L'eccezione impedirà la normale esecuzione del programma e questo sarà utile ad informare altri sviluppatori che usano la vostra classe `Orologio` sul corretto uso della classe. Possiamo intenderla come un'estrema forma di documentazione;
 7. *Nice-to-have*: Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero. Questo non vi ho ancora spiegato come realizzarlo, quindi lo vedremo durante la prossima lezione, oltre ad una revisione delle vostre implementazioni. Nel frattempo, potete usarlo come esercizio di ricerca su StackOverflow :P
 
+## Esempio di orologio per scacchi da tenere alla mano durante la modellazione
+![Immagine di un orologio per scacchi](Immagini/orologio.jpg)
+
