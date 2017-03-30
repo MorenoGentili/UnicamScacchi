@@ -10,6 +10,8 @@ namespace Scacchi.Modello {
         void Avvia();
         void Pausa();
         void Reset();
+        //This should be placed in the interface? I think yes.
+        void FineTurno();
 
         event EventHandler TempoScaduto;
     }
