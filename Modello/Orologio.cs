@@ -9,7 +9,9 @@ namespace Scacchi.Modello
         {
             get
             {
-                TempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
+                if(TurnoGiocatore == TurnoGiocatore.Giocatore1 && !paused)
+                    TempoResiduoGiocatore1 = 
+                        TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoGiocatore1;
             }
             private set
@@ -23,6 +25,9 @@ namespace Scacchi.Modello
         {
             get
             {
+                if(TurnoGiocatore == TurnoGiocatore.Giocatore2 && !paused)
+                    tempoResiduoGiocatore2 = 
+                        TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoGiocatore2;
             }
             private set
@@ -53,15 +58,19 @@ namespace Scacchi.Modello
             Reset();
         }
 
-private DateTime partenzaOrologio = DateTime.MinValue;
+        private DateTime partenzaOrologio = DateTime.MinValue;
+        //boolean variable "paused" is used to keep the state of the system
+        //we could also use a property, but boh let's go
+        private bool paused = false;
         public void Avvia()
         {
             partenzaOrologio = DateTime.Now;
+            paused = false;
         }
 
         public void Pausa()
         {
-            throw new NotImplementedException();
+            paused = true;
         }
 
         public void Reset()
