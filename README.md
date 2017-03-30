@@ -16,5 +16,10 @@ Aprire il file `Modello\Orologio.cs` e continuare con l'implementazione, provand
 7. *Nice-to-have*: Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero. Questo non vi ho ancora spiegato come realizzarlo, quindi lo vedremo durante la prossima lezione, oltre ad una revisione delle vostre implementazioni. Nel frattempo, potete usarlo come esercizio di ricerca su StackOverflow :P
 
 ## Esempio di orologio per scacchi da tenere alla mano durante la modellazione
+Questo particolare orologio ha:
+* Due tasti per cambiare il tono o il volume dell'allarme (che è irrilevante per noi e che perciò non modelleremo);
+* Un unico tasto per avviare e mettere in pausa;
+* Un tasto per resettare il timer;
+* Un tasto posteriore (qui non visibile) per accedere l'orologio. L'orologio si spegne automaticamente dopo alcuni minuti di inattività;
+* Un tastone basculante superiore che serve a passare il turno all'altro giocatore. In questa immagine, è di turno il giocatore che ha i pezzi neri (perciò sta decrescendo il suo tempo residuo).
 ![Immagine di un orologio per scacchi](Immagini/orologio.jpg)
-
