@@ -59,6 +59,7 @@ namespace Scacchi.Modello
         public void Accendi()
         {
             acceso = true;
+            paused = true;
             Reset();
         }
 

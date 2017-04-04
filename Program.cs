@@ -8,7 +8,9 @@ namespace Scacchi
     {
         static void Main(string[] args)
         {
-            IOrologio orologio = new Orologio();
+            SimpleXUnitRunner.SimpleXUnit.RunTests();
+            Console.ReadKey();
+            /*IOrologio orologio = new Orologio();
             try {
                 orologio.Avvia();
             } catch (InvalidOperationException ex) {
@@ -28,7 +30,7 @@ namespace Scacchi
             Thread.Sleep(2000);
             Console.WriteLine($"Tempo giocatore1 (NON E' IL SUO TURNO): {orologio.TempoResiduoGiocatore1} \n" +  
                 $"Tempo giocatore2 (DOVREBBE ESSERE INFERIORE): {orologio.TempoResiduoGiocatore2}");
-            Console.ReadKey();
+            Console.ReadKey(); */
         }
     }
 }
