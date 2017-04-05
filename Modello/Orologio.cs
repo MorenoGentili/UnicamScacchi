@@ -9,6 +9,7 @@ namespace Scacchi.Modello
         {
             get
             {
+
                 if(TurnoGiocatore == TurnoGiocatore.Giocatore1 && !paused)
                     TempoResiduoGiocatore1 = 
                         TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
