@@ -1,9 +1,31 @@
 using System;
+using System.Threading;
 
 namespace Scacchi.Modello
 {
     public class Orologio : IOrologio
     {
+
+        public Orologio() : this(TimeSpan.FromMinutes(Orologio.TempoInizialeInMinuti))
+        {
+        }
+
+        public Orologio(TimeSpan tIniziale)
+        {
+            this.tIniziale = tIniziale;
+            timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+        }
+
+        private void ControllaTempoResiduo(object state)
+        {
+            if (TempoResiduoGiocatore1 <= TimeSpan.Zero || TempoResiduoGiocatore2 <= TimeSpan.Zero)
+                  TempoScaduto?.Invoke(this, null);
+        }
+
+        private TimeSpan tIniziale;
+
+        private Timer timer;
+
         private TimeSpan tempoResiduoGiocatore1;
         public TimeSpan TempoResiduoGiocatore1
         {
@@ -12,7 +34,7 @@ namespace Scacchi.Modello
 
                 if(TurnoGiocatore == TurnoGiocatore.Giocatore1 && !paused)
                     TempoResiduoGiocatore1 = 
-                        TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
+                        tIniziale - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoGiocatore1;
             }
             private set
@@ -28,7 +50,7 @@ namespace Scacchi.Modello
             {
                 if(TurnoGiocatore == TurnoGiocatore.Giocatore2 && !paused)
                     tempoResiduoGiocatore2 = 
-                        TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
+                        tIniziale - (DateTime.Now - partenzaOrologio);
                 return tempoResiduoGiocatore2;
             }
             private set
@@ -53,7 +75,7 @@ namespace Scacchi.Modello
 
         public event EventHandler TempoScaduto;
 
-        private const int tempoInizialeInMinuti = 5;
+        public const int TempoInizialeInMinuti = 5;
         //Da implementare acceso = false dopo alcuni minuti di inattività
         //probabilmente un tanto decantato evento
         private bool acceso = false;
@@ -84,10 +106,10 @@ namespace Scacchi.Modello
 
         public void FineTurno() {
             if(TurnoGiocatore == TurnoGiocatore.Giocatore1) {
-                tempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+                tempoResiduoGiocatore1 = tIniziale;//TimeSpan.FromMinutes(TempoInizialeInMinuti);
                 TurnoGiocatore = TurnoGiocatore.Giocatore2;
             } else {
-                TempoResiduoGiocatore2 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+                TempoResiduoGiocatore2 = tIniziale;//TimeSpan.FromMinutes(TempoInizialeInMinuti);
                 TurnoGiocatore = TurnoGiocatore.Giocatore1;
             }
             Avvia();
@@ -95,8 +117,9 @@ namespace Scacchi.Modello
 
         public void Reset()
         {
-            TempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
-            TempoResiduoGiocatore2 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+            Pausa();
+            TempoResiduoGiocatore1 = tIniziale;//TimeSpan.FromMinutes(TempoInizialeInMinuti);
+            TempoResiduoGiocatore2 = tIniziale;//TimeSpan.FromMinutes(TempoInizialeInMinuti);
         }
     }
 }
