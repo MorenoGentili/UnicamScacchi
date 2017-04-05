@@ -4,8 +4,10 @@ using Scacchi.Modello;
 using Xunit;
 
 namespace Scacchi.Tests {
-
     public class OrologioTest {
+
+        private TimeSpan attesa = TimeSpan.FromMilliseconds(20);
+        private TimeSpan tolleranza = TimeSpan.FromMilliseconds(50);
 
         [Fact]
         public void AccendendoloITempiResiduiDevonoEssereDi5Minuti()
@@ -15,23 +17,23 @@ namespace Scacchi.Tests {
         //When
         orologio1.Accendi();
         //Then
-        Assert.Equal(TimeSpan.FromMinutes(Orologio.TempoInizialeInMinuti), orologio1.TempoResiduoGiocatore1);
-        Assert.Equal(TimeSpan.FromMinutes(Orologio.TempoInizialeInMinuti), orologio1.TempoResiduoGiocatore2);
+        Assert.Equal(orologio1.TempoIniziale, orologio1.TempoResiduoBianco);
+        Assert.Equal(orologio1.TempoIniziale, orologio1.TempoResiduoNero);
         }
 
         [Fact]
-        public void InizioContoAllaRovesciaG1()
+        public void QuandoSiAvviaAlloraIlTempoDeveAvanzarePerBianco()
         {
         //Given
         IOrologio orologio1 = new Orologio();
-        //When
         orologio1.Accendi();
+        //When
         orologio1.Avvia();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
         //Then
-        Assert.InRange(orologio1.TempoResiduoGiocatore1,
-                TimeSpan.FromMilliseconds(Orologio.TempoInizialeInMinuti*60*1000-1000),
-                TimeSpan.FromMilliseconds(Orologio.TempoInizialeInMinuti*60*1000-250));
+        Assert.InRange(orologio1.TempoResiduoBianco,
+                orologio1.TempoIniziale-attesa-tolleranza,
+                orologio1.TempoIniziale-attesa);
         }
 
         [Fact]
@@ -39,129 +41,131 @@ namespace Scacchi.Tests {
         {
         //Given
         IOrologio orologio1 = new Orologio();
-        //When
         orologio1.Accendi();
         orologio1.Avvia();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
+        //When
         orologio1.Pausa();
-        TimeSpan primaLettura = orologio1.TempoResiduoGiocatore1;
-        Thread.Sleep(250);
+        TimeSpan primaLettura = orologio1.TempoResiduoBianco;
+        Thread.Sleep(attesa);
         //Then
-        //Assert.InRange(orologio1.TempoResiduoGiocatore1, TimeSpan.FromMilliseconds(299000), TimeSpan.FromMilliseconds(299750));
-        Assert.Equal(primaLettura, orologio1.TempoResiduoGiocatore1);
+        Assert.Equal(primaLettura, orologio1.TempoResiduoBianco);
         }
 
         /*Quando avvia l'orologio mentre era in pausa, il tempo deve ricominciare a decrescere
         per il giocatore che era di turno*/
         [Fact]
-        public void QuandoIlTempoRiprendeSoloIlG1Avanza()
+        public void QuandoIlTempoRiprendeSoloBiancoAvanza()
         {
         //Given
         IOrologio orologio1 = new Orologio();
-        //When
         orologio1.Accendi();
         orologio1.Avvia();
-        //Thread.Sleep(250);
         orologio1.Pausa();
-        TimeSpan primaLetturaG1 = orologio1.TempoResiduoGiocatore1;
-        TimeSpan primaLetturaG2 = orologio1.TempoResiduoGiocatore2;
+        TimeSpan primaLetturaBianco = orologio1.TempoResiduoBianco;
+        TimeSpan primaLetturaNero = orologio1.TempoResiduoNero;
+        //When
         orologio1.Avvia();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
         //Then
-        Assert.InRange(orologio1.TempoResiduoGiocatore1.TotalMilliseconds,
-                primaLetturaG1.TotalMilliseconds - 300,
-                primaLetturaG1.TotalMilliseconds - 250);
-        //Assert.Equal(primaLetturaG2, orologio1.TempoResiduoGiocatore2);
-        Assert.True(primaLetturaG2 == orologio1.TempoResiduoGiocatore2);
+        Assert.InRange(orologio1.TempoResiduoBianco,
+                primaLetturaBianco - attesa - tolleranza,
+                primaLetturaBianco - attesa);
+        //Assert.Equal(primaLetturaNero, orologio1.TempoResiduoNero);
+        Assert.True(primaLetturaNero == orologio1.TempoResiduoNero);
         }
 
         /*Quando si cambia giocatore, il tempo deve arrestarsi per il giocatore precedente ed iniziare a
         decrescere per il giocatore attualmente di turno*/
         [Fact]
-        public void QuandoG1PassaIlTempoAvanzaPerG2()
+        public void QuandoBiancoPassaIlTurnoIlTempoAvanzaPerNero()
         {
         //Given
         IOrologio orologio1 = new Orologio();
-        //When
         orologio1.Accendi();
         orologio1.Avvia();
+        //When
         orologio1.FineTurno();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
         //Then
-        Assert.InRange(orologio1.TempoResiduoGiocatore1.TotalMilliseconds,
-                Orologio.TempoInizialeInMinuti*60*1000-25,
-                Orologio.TempoInizialeInMinuti*60*1000);
-        Assert.InRange(orologio1.TempoResiduoGiocatore2.TotalMilliseconds,
-                Orologio.TempoInizialeInMinuti*60*1000-500,
-                Orologio.TempoInizialeInMinuti*60*1000-250);
+        Assert.InRange(orologio1.TempoResiduoBianco,
+                orologio1.TempoIniziale - tolleranza,
+                orologio1.TempoIniziale);
+        Assert.InRange(orologio1.TempoResiduoNero,
+                orologio1.TempoIniziale - attesa - tolleranza,
+                orologio1.TempoIniziale - attesa);
         }
 
         [Fact]
-        public void QuandoG2PassaIlTempoAvanzaPerG1()
+        public void QuandoNeroPassaIlTurnoIlTempoAvanzaPerBianco()
         {
         //Given
         IOrologio orologio1 = new Orologio();
-        //When
         orologio1.Accendi();
         orologio1.Avvia();
         orologio1.FineTurno();
+        //When
         orologio1.FineTurno();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
         //Then
-        Assert.InRange(orologio1.TempoResiduoGiocatore1.TotalMilliseconds, 299500, 299750);
-        Assert.InRange(orologio1.TempoResiduoGiocatore2.TotalMilliseconds, 299975, 300000);
+        Assert.InRange(orologio1.TempoResiduoBianco,
+        orologio1.TempoIniziale - attesa - tolleranza,
+        orologio1.TempoIniziale - attesa);
+
+        Assert.InRange(orologio1.TempoResiduoNero,
+        orologio1.TempoIniziale - tolleranza,
+        orologio1.TempoIniziale);
         }
         
         /*Quando resetta l'orologio, il tempo deve essere reimpostato a 5 minuti per entrambi i giocatori.
         Il tempo residuo resterà fermo per entrambi i giocatori finché l'utente non lo avvia*/
         [Fact]
-        public void OnResetSiRicominciada5Minuti()
+        public void SulResetSiRicominciaDalTempoIniziale()
         {
         //Given
         IOrologio orologio1 = new Orologio();
         orologio1.Accendi();
         orologio1.Avvia();
-        Thread.Sleep(250);
+        Thread.Sleep(attesa);
         orologio1.FineTurno();
-        Thread.Sleep(500);
+        Thread.Sleep(attesa);
         orologio1.FineTurno();
-        Thread.Sleep(125);
+        Thread.Sleep(attesa);
         //When
         orologio1.Reset();
         Thread.Sleep(1);
         //Then
-        Assert.Equal(orologio1.TempoResiduoGiocatore1.TotalMilliseconds, 300000);
-        Assert.Equal(orologio1.TempoResiduoGiocatore2.TotalMilliseconds, 300000);
+        Assert.Equal(orologio1.TempoResiduoBianco, orologio1.TempoIniziale);
+        Assert.Equal(orologio1.TempoResiduoNero, orologio1.TempoIniziale);
         }
 
         [Fact]
-        public void ThrowExQuandoAvvioSenzaAccendere()
+        public void QuandoAvvioSenzaAccendereDeveVerificarsiUnEccezione()
         {
         //Given
         IOrologio orologio1 = new Orologio();
         //When
-//        orologio1.Avvia();
+
         //Then
-        Assert.Throws(typeof(InvalidOperationException), () => {orologio1.Avvia();});
+        Assert.Throws(typeof(InvalidOperationException), () => {
+                orologio1.Avvia();
+        });
         }
 
-        /*Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero.
-        Questo non vi ho ancora spiegato come realizzarlo, quindi lo vedremo durante la prossima lezione,
-        oltre ad una revisione delle vostre implementazioni. Nel frattempo, potete usarlo come esercizio di
-        ricerca su StackOverflow :P*/
+        /*Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero.*/
         [Fact]
-        public void OnTimeOutSollevareEventoRelativo()
+        public void QuandoIlTempoDiUnGiocatoreScendeAZeroDeveEssereSollevatoTempoScaduto()
         {
         //Given
-        IOrologio orologio1 = new Orologio(TimeSpan.FromMilliseconds(50)) ;
-        //When
+        IOrologio orologio1 = new Orologio(TimeSpan.FromMilliseconds(50));
         orologio1.Accendi();
         orologio1.Avvia();
         bool invocato = false;
         orologio1.TempoScaduto += (sender, arg1) => {
             invocato = true;
         };
-        Thread.Sleep(2000);
+        //When
+        Thread.Sleep(200);
         //Then
         Assert.True(invocato);
         }

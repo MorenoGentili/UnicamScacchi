@@ -2,15 +2,15 @@ using System;
 
 namespace Scacchi.Modello {
     public interface IOrologio {
-        TimeSpan TempoResiduoGiocatore1 {get;}
-        TimeSpan TempoResiduoGiocatore2 {get;}
-        TurnoGiocatore TurnoGiocatore {get;set;}
+        TimeSpan TempoResiduoBianco {get;}
+        TimeSpan TempoResiduoNero {get;}
+        Colore TurnoAttuale {get;}
+        TimeSpan TempoIniziale {get;}
 
         void Accendi();
         void Avvia();
         void Pausa();
         void Reset();
-        //This should be placed in the interface? I think yes.
         void FineTurno();
 
         event EventHandler TempoScaduto;

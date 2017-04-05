@@ -1,3 +1,5 @@
+using Scacchi.Modello.Pezzi;
+
 namespace Scacchi.Modello
 {
     public interface ICasa
