@@ -1,6 +1,6 @@
 namespace Scacchi.Modello{
-    public enum TurnoGiocatore{
-        Giocatore1 = 1,
-        Giocatore2 = 2
+    public enum Colore {
+        Nero = 0,
+        Bianco = 1
     }
 }

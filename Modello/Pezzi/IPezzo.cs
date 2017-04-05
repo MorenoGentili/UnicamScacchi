@@ -1,4 +1,4 @@
-namespace Scacchi.Modello
+namespace Scacchi.Modello.Pezzi
 {
     public interface IPezzo
     {
@@ -6,6 +6,10 @@ namespace Scacchi.Modello
         //Se true: il pezzo ha potuto muoversi nella casa di destinazione
         //Se false: c'era qualcosa che gli impediva il movimento, come un pezzo "amico" dello stesso colore
         //oppure la destinazione non era raggiungibile dal pezzo attuale (es. è stato chiesto ad una torre di muoversi in diagonale)
-        bool Muovi(ICasa partenza, ICasa destinazione);
+        bool PuòMuovere(Colonna colonnaPartenza,
+            Traversa traversaPartenza,
+            Colonna colonnaArrivo,
+            Traversa traversaArrivo);
+        Colore Colore { get; }
     }
 }
