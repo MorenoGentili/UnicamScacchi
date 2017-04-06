@@ -293,6 +293,51 @@ namespace Scacchi.Modello
             Assert.True(esito);
        }
 
+       [Fact]
+       public void IlCavalloNonPuoMuoversiInVerticale()
+       {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                                colonnaPartenza: Colonna.B,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.B,
+                                traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.False(esito);
+       }
+
+       [Fact]
+       public void IlCavalloNonPuoMuoversiInOrizzontale()
+       {
+           //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                                colonnaPartenza: Colonna.C,
+                                traversaPartenza: Traversa.Terza,
+                                colonnaArrivo: Colonna.E,
+                                traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.False(esito);
+       }
+
+       [Fact]
+       public void IlCavalloNonPuoMuoversiInDiagonale()
+       {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Nero);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                                colonnaPartenza: Colonna.G,
+                                traversaPartenza: Traversa.Ottava,
+                                colonnaArrivo: Colonna.E,
+                                traversaArrivo: Traversa.Sesta);
+            //Then
+            Assert.False(esito);
+       }
+
 
     }
     

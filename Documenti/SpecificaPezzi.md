@@ -7,7 +7,7 @@ Ogni set di pezzi (che sia bianco o nero) è composto di pedoni, torri, alfieri,
 3. (Completato) La Torre può spostarsi lungo una linea verticale o orizzontale di quante case desidera;
 4. (Completato) L'Alfiere può spostarsi lungo una linea diagonale di quante case desidera;
 5. (Completato) La Donna può spostarsi lungo una linea verticale, orizzontale o diagonale di quante case desidera;
-6. Il Cavallo può spostarsi con un movimento ad "L", ovvero una casa orizzontalmente e due verticalmente; oppure, due orizzontalmente e una verticalmente;
+6. (Completato) Il Cavallo può spostarsi con un movimento ad "L", ovvero una casa orizzontalmente e due verticalmente; oppure, due orizzontalmente e una verticalmente;
 7. Il Re può spostarsi orizzontalmente, verticalmente o diagonalmente di una sola casa.  
 
 *Nota*: questa specifica non è completa perché tratta il pezzo come se fosse l'unico esistente sulla scacchiera. Va bene così, per ora. La prossima settimana la completeremo.
