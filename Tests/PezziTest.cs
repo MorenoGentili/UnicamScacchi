@@ -71,10 +71,15 @@ namespace Scacchi.Modello
         public void LaTorrePuoMuoversiOrizzontalmente()
         {
         //Given
-        Torre torre;
+        Torre torre= new Torre(Colore.Nero);
         //When
-        
+        bool esito = torre.PuòMuovere(
+            colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Seconda,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Quarta);
         //Then
+        Assert.True(esito);
         }
 
     }

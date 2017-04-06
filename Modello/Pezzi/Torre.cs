@@ -1,14 +1,21 @@
-using System;
 
 namespace Scacchi.Modello.Pezzi
 {
     public class Torre : IPezzo
     {
-        public Colore Colore => throw new NotImplementedException();
-
+        private readonly Colore colore;
+        public Torre(Colore colore)
+        {
+            this.colore = colore;
+        }
+        public Colore Colore {
+            get{
+                return this.colore;
+            }
+        }
         public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
