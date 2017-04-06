@@ -37,5 +37,45 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
+        [Fact]
+        public void IlPedoneNeroPuoMuovereAvantiDiDueCaseConTraversaIniziale()
+        {
+            //Given
+            Pedone pedone = new Pedone(Colore.Nero);
+            //When
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Settima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Quinta);
+
+            //Then
+            Assert.True(esito);
+        }
+        [Fact]
+        public void IlPedoneBiancoPuoMuovereAvantiDiDueCaseConTraversaIniziale()
+        {
+            //Given
+            Pedone pedone = new Pedone(Colore.Bianco);
+            //When
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Seconda,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Quarta);
+
+            //Then
+            Assert.True(esito);
+        }
+        [Fact]
+        public void LaTorrePuoMuoversiOrizzontalmente()
+        {
+        //Given
+        Torre torre;
+        //When
+        
+        //Then
+        }
+
     }
 }
