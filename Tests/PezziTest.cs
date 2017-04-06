@@ -68,10 +68,40 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
         [Fact]
-        public void LaTorrePuoMuoversiOrizzontalmente()
+        public void LaTorreNeraPuoMuoversiOrizzontalmente()
         {
             //Given
             Torre torre = new Torre(Colore.Nero);
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Ottava,
+                    colonnaArrivo: Colonna.B,
+                    traversaArrivo: Traversa.Ottava);
+            //Then
+            Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaTorreNeraPuoMuoversiVerticalmente()
+        {
+            //Given
+            Torre torre = new Torre(Colore.Nero);
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.H,
+                    traversaPartenza: Traversa.Ottava,
+                    colonnaArrivo: Colonna.H,
+                    traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaTorreBiancaPuoMuoversiOrizzontalmente()
+        {
+            //Given
+            Torre torre = new Torre(Colore.Bianco);
             //When
             bool esito = torre.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -83,10 +113,10 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void LaTorrePuoMuoversiVerticalmente()
+        public void LaTorreBiancaPuoMuoversiVerticalmente()
         {
             //Given
-            Torre torre = new Torre(Colore.Nero);
+            Torre torre = new Torre(Colore.Bianco);
             //When
             bool esito = torre.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -96,6 +126,7 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
+
 
         //test per gli alfieri
         [Fact]
