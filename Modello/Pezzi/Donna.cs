@@ -17,7 +17,28 @@ namespace Scacchi.Modello.Pezzi{
 
         public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
         {
-            throw new NotImplementedException();
+            int spostamentoTraversa = ValoreAssoluto(traversaArrivo - traversaPartenza);
+            int spostamentoColonna = ValoreAssoluto(colonnaArrivo - colonnaPartenza);
+
+            if (spostamentoColonna == 0 && spostamentoTraversa == 0){ // Non può stare fermo
+                return false;
+            } else {
+                if(spostamentoColonna == spostamentoTraversa){
+                    return true; // Si muove in diagonale (qualsiasi)
+                } else if (spostamentoColonna == 0 || spostamentoTraversa == 0) { // Si è spostato in orizzontale o in verticale
+                    return true;
+                    
+                }  else {
+                    return false;
+                } 
+            }
+        }
+
+        private int ValoreAssoluto(int numero){
+            if(numero < 0)
+                return -numero;
+            
+            return numero;
         }
     }
 }
