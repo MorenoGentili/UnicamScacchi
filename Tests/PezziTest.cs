@@ -99,7 +99,7 @@ namespace Scacchi.Modello
 
         //test per gli alfieri
         [Fact]
-        public void AlfiereSiMuoveDiagonalmenteQuantoVuole()
+        public void AlfiereBiancoSiMuoveDiagonalmenteQuantoVuole()
         {
             //Given
             Alfiere alfiere = new Alfiere(Colore.Bianco);
@@ -109,6 +109,37 @@ namespace Scacchi.Modello
                     traversaPartenza: Traversa.Prima,
                     colonnaArrivo: Colonna.G,
                     traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.True(esito);
+        }
+        //test per gli alfieri
+        [Fact]
+        public void AlfiereNeroSiMuoveDiagonalmenteQuantoVuole()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.C,
+                    traversaPartenza: Traversa.Ottava,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Sesta);
+            //Then
+            Assert.True(esito);
+        }
+
+        //test per la regina
+        [Fact]
+        public void LaReginaSiPuoMuovereVerticalmenteDoveVuole()
+        {
+            //Given
+            Regina regina = new Regina(Colore.Bianco);
+            //When
+            bool esito = regina.PuòMuovere(
+                    colonnaPartenza: Colonna.C,
+                        traversaPartenza: Traversa.Prima,
+                        colonnaArrivo: Colonna.G,
+                        traversaArrivo: Traversa.Quinta);
             //Then
             Assert.True(esito);
         }
