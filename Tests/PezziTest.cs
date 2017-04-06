@@ -119,13 +119,44 @@ namespace Scacchi.Modello
             //Given
             Torre torre = new Torre(Colore.Nero);
             //When
-                bool esito = torre.PuòMuovere(
-                                    colonnaPartenza: Colonna.A,
-                                    traversaPartenza: Traversa.Seconda,
-                                    colonnaArrivo: Colonna.D,
-                                    traversaArrivo: Traversa.Prima);
+            bool esito = torre.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Seconda,
+                                colonnaArrivo: Colonna.D,
+                                traversaArrivo: Traversa.Prima);
             //Then
             Assert.False(esito);
        }
+
+       [Fact]
+       public void LoAlfierePuoMuoversiInAntidiagonale()
+       {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                                colonnaPartenza: Colonna.C,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.D,
+                                traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
+       }
+
+       [Fact]
+       public void LoAlfierePuoMuoversiInDiagonale()
+       {
+           //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                                colonnaPartenza: Colonna.D,
+                                traversaPartenza: Traversa.Sesta,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+       }
+       
     }
 }

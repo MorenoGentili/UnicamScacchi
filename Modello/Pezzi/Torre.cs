@@ -1,5 +1,3 @@
-using System;
-
 namespace Scacchi.Modello.Pezzi{
     public class Torre : IPezzo
     {
