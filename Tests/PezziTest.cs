@@ -157,6 +157,51 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
        }
+
+       [Fact]
+       public void LoAlfiereNonPuoMuoversiInOrizzontale()
+       {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Prima);
+            //Then
+            Assert.False(esito);
+       }
+
+       [Fact]
+       public void LoAlfiereNonPuoMuoversiInVerticale()
+       {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.A,
+                                traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.False(esito);
+       }
+
+       [Fact]
+       public void LoAlfiereNonPuoRestareFermo()
+       {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.A,
+                                traversaArrivo: Traversa.Prima);
+            //Then
+            Assert.False(esito);
+       }
        
     }
 }
