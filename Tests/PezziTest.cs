@@ -10,7 +10,7 @@ namespace Scacchi.Modello
         public void IlPedoneBiancoPuoMuovereAvantiDiUnaCasa()
         {
             //Given
-            Pedone pedone = new Pedone(Colore.Nero);
+            Pedone pedone = new Pedone(Colore.Bianco);
             //When
             bool esito = pedone.PuòMuovere(
                     colonnaPartenza: Colonna.A,
