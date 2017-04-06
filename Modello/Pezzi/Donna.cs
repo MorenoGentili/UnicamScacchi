@@ -1,4 +1,4 @@
-using System;
+using static Scacchi.Funzioni.Matematica;
 
 namespace Scacchi.Modello.Pezzi{
     public class Donna : IPezzo
@@ -32,13 +32,6 @@ namespace Scacchi.Modello.Pezzi{
                     return false;
                 } 
             }
-        }
-
-        private int ValoreAssoluto(int numero){
-            if(numero < 0)
-                return -numero;
-            
-            return numero;
         }
     }
 }

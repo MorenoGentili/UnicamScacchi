@@ -1,4 +1,4 @@
-using System;
+using static Scacchi.Funzioni.Matematica;
 
 namespace Scacchi.Modello.Pezzi{
     public class Alfiere : IPezzo
@@ -31,13 +31,6 @@ namespace Scacchi.Modello.Pezzi{
                 }
             }   
 
-        }
-
-        private int ValoreAssoluto(int numero){
-            if(numero < 0)
-                return -numero;
-            
-            return numero;
         }
     }
 }
