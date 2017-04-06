@@ -22,9 +22,10 @@ namespace Scacchi.Modello.Pezzi{
 
             // Faccio lo XOR
             if (stessaColonna ^ stessaRiga){
-
+                return true;
+            } else {
+                return false;
             }
-            throw new NotImplementedException();
         }
     }
 }
