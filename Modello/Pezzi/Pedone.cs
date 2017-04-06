@@ -22,10 +22,16 @@ namespace Scacchi.Modello.Pezzi {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
             var distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
 
-            if (stessaColonna && distanzaTraLeTraverse == 1 && colore == Colore.Bianco){
+            if (stessaColonna && distanzaTraLeTraverse == 1 && colore == Colore.Bianco ){
                 return true;
             } else if(stessaColonna && distanzaTraLeTraverse == -1 && colore == Colore.Nero) {
                 return true;
+            } else if(stessaColonna && distanzaTraLeTraverse == 2 && colore == Colore.Bianco &&
+                        traversaPartenza == Traversa.Seconda){
+                            return true;
+            } else if(stessaColonna && distanzaTraLeTraverse == -2 && colore == Colore.Nero && 
+                        traversaPartenza == Traversa.Settima){
+                            return true;
             } else {
                 return false;
             }

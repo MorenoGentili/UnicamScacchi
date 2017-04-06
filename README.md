@@ -19,5 +19,3 @@ Procedere come segue:
  * Solo a questo punto, aprire la classe del pezzo in questione (es. [Modello/Pezzi/Pedone.cs](Modello/Pezzi/Pedone.cs) e scrivere la minima quantità di codice che serve a far passare il test;
  * Lanciare di nuovo il programma e verificare che il test è passato (è chiamata "fase verde");
  * Ripetere da capo tutti i passi finché non sono stati svolti tutti i punti della specifica. Tenere presente che per testare ogni punto della specifica potrebbero essere necessari uno o più test.
-
-*Nota:* Sono già stati scritti due test per il primo punto della [specifica](Documenti/SpecificaPezzi.md), ma il secondo sta fallendo. Scrivere il codice in [Modello/Pezzo.cs](Modello/Pezzo.cs) per farlo passare e poi proseguire con i successivi punti della specifica.
