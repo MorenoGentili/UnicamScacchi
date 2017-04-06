@@ -277,5 +277,23 @@ namespace Scacchi.Modello
        //Then
        Assert.False(esito);
        }
+
+       [Fact]
+       public void IlCavalloPuoMuoversiAdL()
+       {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                                colonnaPartenza: Colonna.B,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+       }
+
+
     }
+    
 }
