@@ -333,5 +333,54 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
+
+          //test per il re
+        [Fact]
+        public void IlReBiancoSiMuoveOrizzontalmenteDiUnaSolaCasa()
+        {
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                    colonnaPartenza: Colonna.E,
+                        traversaPartenza: Traversa.Settima,
+                        colonnaArrivo: Colonna.F,
+                        traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+        }
+
+        //test per il re
+        [Fact]
+        public void IlReBiancoSiMuoveVerticalmenteDiUnaSolaCasa()
+        {
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                    colonnaPartenza: Colonna.E,
+                        traversaPartenza: Traversa.Sesta,
+                        colonnaArrivo: Colonna.E,
+                        traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+        }
+
+        //test per il re
+        [Fact]
+        public void IlReBiancoSiMuoveOrizzontalmentDiagonalmenteDiUnaSolaCasa()
+        {
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                    colonnaPartenza: Colonna.F,
+                        traversaPartenza: Traversa.Settima,
+                        colonnaArrivo: Colonna.E,
+                        traversaArrivo: Traversa.Ottava);
+            //Then
+            Assert.True(esito);
+        }
+
     }
 }
