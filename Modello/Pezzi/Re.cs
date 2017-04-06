@@ -1,4 +1,4 @@
-using System;
+using static Scacchi.Funzioni.Matematica;
 
 namespace Scacchi.Modello.Pezzi{
     public class Re : IPezzo
@@ -16,7 +16,17 @@ namespace Scacchi.Modello.Pezzi{
         }
         public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
         {
-            throw new NotImplementedException();
+            int spostamentoTraversa = ValoreAssoluto(traversaArrivo - traversaPartenza);
+            int spostamentoColonna = ValoreAssoluto(colonnaArrivo - colonnaPartenza);
+
+            if(spostamentoColonna == 1 && (spostamentoTraversa == 0 || spostamentoTraversa == 1)){
+                    return true;
+            } else if (spostamentoTraversa == 1 && ( spostamentoColonna == 0 || spostamentoColonna == 1)){
+                return true;
+            } else {
+                return false;
+            }
+            
         }
     }
 }
