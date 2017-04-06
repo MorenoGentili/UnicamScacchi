@@ -70,31 +70,47 @@ namespace Scacchi.Modello
         [Fact]
         public void LaTorrePuoMuoversiOrizzontalmente()
         {
-        //Given
-        Torre torre= new Torre(Colore.Nero);
-        //When
-        bool esito = torre.PuòMuovere(
-            colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Seconda,
-                colonnaArrivo: Colonna.B,
-                traversaArrivo: Traversa.Seconda);
-        //Then
-        Assert.True(esito);
+            //Given
+            Torre torre = new Torre(Colore.Nero);
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Seconda,
+                    colonnaArrivo: Colonna.B,
+                    traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
         }
-        
+
         [Fact]
         public void LaTorrePuoMuoversiVerticalmente()
         {
-        //Given
-        Torre torre= new Torre(Colore.Nero);
-        //When
-        bool esito = torre.PuòMuovere(
-            colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Seconda,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Terza);
-        //Then
-        Assert.True(esito);
+            //Given
+            Torre torre = new Torre(Colore.Nero);
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Seconda,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
+
+        //test per gli alfieri
+        [Fact]
+        public void AlfiereSiMuoveDiagonalmenteQuantoVuole()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.C,
+                    traversaPartenza: Traversa.Prima,
+                    colonnaArrivo: Colonna.B,
+                    traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
         }
 
     }

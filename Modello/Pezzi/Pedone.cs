@@ -53,14 +53,14 @@ namespace Scacchi.Modello.Pezzi
                 //va bene 
                 //se sono qui va tutto bene e la partenza 
                 var stessaColonna = colonnaPartenza == colonnaArrivo;
-                var distanzaTraLeTraverse = (int)traversaArrivo-(int)traversaPartenza;
+                var distanzaTraLeTraverse = (int)traversaArrivo - (int)traversaPartenza;
                 //devo controllare la se la traversa di partenza è uguale a 2 perchè se 
                 //la par
                 if (stessaColonna && distanzaTraLeTraverse == 1)
                 {
                     return true;
                 }
-                else if (stessaColonna && distanzaTraLeTraverse == 2 && (int)traversaPartenza ==2)
+                else if (stessaColonna && distanzaTraLeTraverse == 2 && (int)traversaPartenza == 2)
                 {
                     //devo controllare il caso in cui sia alla linea di partenza del pedone, in quel caso posso
                     //Avanzare di due
