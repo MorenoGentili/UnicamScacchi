@@ -1,5 +1,5 @@
 # Pezzi
-Ogni set di pezzi (che sia bianco o nero) è composto di 8 pedoni, 2 torri, 2 alfieri, 2 cavalli, 1 donna e 1 re.
+Ogni set di pezzi (che sia bianco o nero) è composto di pedoni, torri, alfieri, cavalli, donna e re.
 
 ## Specifica
 1. Il pedone può avanzare verticalmente di una casa. Il pedone bianco inizia dalla seconda traversa e può avanzare fino all'ottava. Viceversa, il pedone nero inizia dalla settima traversa e può avanzare fino alla prima;
