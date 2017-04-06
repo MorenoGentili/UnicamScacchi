@@ -383,6 +383,81 @@ namespace Scacchi.Modello
             Assert.True(esito);
        }
 
+       [Fact]
+       public void IlReNonPuoMuoversiAdL()
+       {
+            //Given
+            Re re = new Re(Colore.Nero);
+            //When
+            bool esito = re.PuòMuovere(
+                                        colonnaPartenza: Colonna.D,
+                                        traversaPartenza: Traversa.Ottava,
+                                        colonnaArrivo: Colonna.E,
+                                        traversaArrivo: Traversa.Sesta);
+            //Then
+            Assert.False(esito);
+       }
+
+       [Fact]
+       public void IlReNonPuoMuoversiOltreUnaCasellaOrizzontale()
+       {
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                                        colonnaPartenza: Colonna.D,
+                                        traversaPartenza: Traversa.Prima,
+                                        colonnaArrivo: Colonna.F,
+                                        traversaArrivo: Traversa.Prima);
+            //Then
+            Assert.False(esito);    
+       }
+
+       [Fact]
+       public void IlReNonPuoMuoversiOltreUnaCasellaVerticale()
+       {
+           //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                                        colonnaPartenza: Colonna.D,
+                                        traversaPartenza: Traversa.Prima,
+                                        colonnaArrivo: Colonna.D,
+                                        traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.False(esito); 
+       }
+
+       [Fact]
+       public void IlReNonPuoRimanereFermo()
+       {
+           //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                                        colonnaPartenza: Colonna.D,
+                                        traversaPartenza: Traversa.Prima,
+                                        colonnaArrivo: Colonna.D,
+                                        traversaArrivo: Traversa.Prima);
+            //Then
+            Assert.False(esito); 
+       }
+
+       [Fact]
+       public void IlReNonPuoMuoversiOltreUnaCasellaInDiagonale()
+       {
+           //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(
+                                        colonnaPartenza: Colonna.D,
+                                        traversaPartenza: Traversa.Prima,
+                                        colonnaArrivo: Colonna.H,
+                                        traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.False(esito); 
+       }
+
 
     }
     
