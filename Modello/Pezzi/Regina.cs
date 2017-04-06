@@ -19,8 +19,13 @@ namespace Scacchi.Modello.Pezzi
 
         public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
         {
-            //controllo che la regina possa muoversi verticalmente dove vuole
-            if (colonnaArrivo == colonnaPartenza)
+            //faccio in modo che la regina possa muoversi verticalmente dove vuole
+            if (colonnaArrivo == colonnaPartenza && traversaPartenza!=traversaArrivo)
+            {
+                return true;
+            }
+            //faccio in modo che la regina possa muoversi lateralmente
+            if (colonnaArrivo != colonnaPartenza && (traversaPartenza==traversaArrivo))
             {
                 return true;
             }
