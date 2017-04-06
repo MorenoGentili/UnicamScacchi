@@ -189,6 +189,20 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-
+         //test per la regina
+        [Fact]
+        public void LaReginaSiPuoDiagonalmenteDoveVuole()
+        {
+            //Given
+            Regina regina = new Regina(Colore.Bianco);
+            //When
+            bool esito = regina.PuòMuovere(
+                    colonnaPartenza: Colonna.C,
+                        traversaPartenza: Traversa.Prima,
+                        colonnaArrivo: Colonna.E,
+                        traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
     }
 }
