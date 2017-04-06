@@ -262,5 +262,20 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
        }
+
+       [Fact]
+       public void LaDonnaNonPuoMuoversiAdL()
+       {
+       //Given
+       Donna donna = new Donna(Colore.Bianco);
+       //When
+       bool esito = donna.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.B,
+                                traversaArrivo: Traversa.Terza);
+       //Then
+       Assert.False(esito);
+       }
     }
 }
