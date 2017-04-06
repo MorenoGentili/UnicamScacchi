@@ -76,8 +76,8 @@ namespace Scacchi.Modello
         bool esito = torre.PuòMuovere(
             colonnaPartenza: Colonna.A,
                 traversaPartenza: Traversa.Seconda,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Quarta);
+                colonnaArrivo: Colonna.B,
+                traversaArrivo: Traversa.Seconda);
         //Then
         Assert.True(esito);
         }
