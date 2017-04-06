@@ -169,7 +169,7 @@ namespace Scacchi.Modello
             bool esito = regina.PuòMuovere(
                     colonnaPartenza: Colonna.C,
                         traversaPartenza: Traversa.Prima,
-                        colonnaArrivo: Colonna.G,
+                        colonnaArrivo: Colonna.C,
                         traversaArrivo: Traversa.Quinta);
             //Then
             Assert.True(esito);
