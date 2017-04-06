@@ -245,9 +245,9 @@ namespace Scacchi.Modello
             //When
             bool esito = regina.PuòMuovere(
                     colonnaPartenza: Colonna.D,
-                        traversaPartenza: Traversa.Ottava,
-                        colonnaArrivo: Colonna.H,
-                        traversaArrivo: Traversa.Quarta);
+                        traversaPartenza: Traversa.Quarta,
+                        colonnaArrivo: Colonna.B,
+                        traversaArrivo: Traversa.Seconda);
             //Then
             Assert.True(esito);
         }
@@ -255,7 +255,7 @@ namespace Scacchi.Modello
 
          //test per il cavallo
         [Fact]
-        public void IlCavalloSiMuoveAdL()
+        public void IlCavalloBiancoSiMuoveAdL()
         {
             //Given
             Cavallo cavallo = new Cavallo(Colore.Bianco);
@@ -265,6 +265,22 @@ namespace Scacchi.Modello
                         traversaPartenza: Traversa.Prima,
                         colonnaArrivo: Colonna.C,
                         traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
+
+         //test per il cavallo
+        [Fact]
+        public void IlCavalloNeroSiMuoveAdL()
+        {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Nero);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                    colonnaPartenza: Colonna.B,
+                        traversaPartenza: Traversa.Ottava,
+                        colonnaArrivo: Colonna.C,
+                        traversaArrivo: Traversa.Sesta);
             //Then
             Assert.True(esito);
         }
