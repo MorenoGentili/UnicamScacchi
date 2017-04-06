@@ -17,6 +17,13 @@ namespace Scacchi.Modello.Pezzi{
 
         public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
         {
+            var stessaColonna = colonnaPartenza == colonnaArrivo;
+            var stessaRiga = traversaPartenza == traversaArrivo;
+
+            // Faccio lo XOR
+            if (stessaColonna ^ stessaRiga){
+
+            }
             throw new NotImplementedException();
         }
     }
