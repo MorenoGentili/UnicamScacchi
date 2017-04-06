@@ -21,7 +21,6 @@ namespace Scacchi.Modello.Pezzi
             if(((int)traversaPartenza == (int)traversaArrivo) && (colonnaPartenza!=colonnaArrivo)){
                 return true;
             }
-            
             return false;
         }
     }
