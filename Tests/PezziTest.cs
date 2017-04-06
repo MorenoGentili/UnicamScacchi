@@ -203,5 +203,64 @@ namespace Scacchi.Modello
             Assert.False(esito);
        }
        
+       [Fact]
+       public void LaDonnaPuoMuovereInVerticale()
+       {
+       //Given
+       Donna donna = new Donna(Colore.Nero);
+       //When
+        bool esito = donna.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.A,
+                                traversaArrivo: Traversa.Seconda);
+       //Then
+       Assert.True(esito);
+       }
+
+       [Fact]
+       public void LaDonnaPuoMuovereInOrizzontale()
+       {
+       //Given
+       Donna donna = new Donna(Colore.Nero);
+       //When
+       bool esito = donna.PuòMuovere(
+                                colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Prima);
+       //Then
+       Assert.True(esito);
+       }
+
+       [Fact]
+       public void LaDonnaPuoMuovereInAntidiagonale()
+       {
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+                                colonnaPartenza: Colonna.C,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.D,
+                                traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
+       }
+
+       [Fact]
+       public void LaDonnaPuoMuovereInDiagonale()
+       {
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+                                colonnaPartenza: Colonna.D,
+                                traversaPartenza: Traversa.Sesta,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+       }
     }
 }

@@ -6,7 +6,7 @@ Ogni set di pezzi (che sia bianco o nero) è composto di pedoni, torri, alfieri,
 2. (Completato) Se il Pedone si trova nella sua traversa di inizio (la seconda se il pedone è bianco o la settima se il pedone è nero) può avanzare due case;
 3. (Completato) La Torre può spostarsi lungo una linea verticale o orizzontale di quante case desidera;
 4. (Completato) L'Alfiere può spostarsi lungo una linea diagonale di quante case desidera;
-5. La Donna può spostarsi lungo una linea verticare, orizzontale o diagonale di quante case desidera;
+5. La Donna può spostarsi lungo una linea verticale, orizzontale o diagonale di quante case desidera;
 6. Il Cavallo può spostarsi con un movimento ad "L", ovvero una casa orizzontalmente e due verticalmente; oppure, due orizzontalmente e una verticalmente;
 7. Il Re può spostarsi orizzontalmente, verticalmente o diagonalmente di una sola casa.  
 
