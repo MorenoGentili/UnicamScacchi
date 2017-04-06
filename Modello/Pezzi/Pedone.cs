@@ -22,7 +22,9 @@ namespace Scacchi.Modello.Pezzi {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
             var distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
 
-            if (stessaColonna && distanzaTraLeTraverse == 1){
+            if (stessaColonna && distanzaTraLeTraverse == 1 && colore == Colore.Bianco){
+                return true;
+            } else if(stessaColonna && distanzaTraLeTraverse == -1 && colore == Colore.Nero) {
                 return true;
             } else {
                 return false;
