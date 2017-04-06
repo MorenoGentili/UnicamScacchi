@@ -67,5 +67,20 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
        }
+
+       [Fact]
+       public void LaTorrePuoMuovereLungoUnaLineaOrizzontale()
+       {
+            //Given
+            Torre torre = new Torre(Colore.Bianco);
+            //When
+            bool esito = torre.PuòMuovere(
+                            colonnaPartenza: Colonna.A,
+                            traversaPartenza: Traversa.Prima,
+                            colonnaArrivo: Colonna.C,
+                            traversaArrivo: Traversa.Prima);
+            //Then
+            Assert.True(esito);
+       }
     }
 }
