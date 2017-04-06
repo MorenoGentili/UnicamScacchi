@@ -107,8 +107,8 @@ namespace Scacchi.Modello
             bool esito = alfiere.PuòMuovere(
                 colonnaPartenza: Colonna.C,
                     traversaPartenza: Traversa.Prima,
-                    colonnaArrivo: Colonna.B,
-                    traversaArrivo: Traversa.Seconda);
+                    colonnaArrivo: Colonna.G,
+                    traversaArrivo: Traversa.Quinta);
             //Then
             Assert.True(esito);
         }
