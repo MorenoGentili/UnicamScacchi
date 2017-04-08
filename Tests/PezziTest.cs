@@ -353,6 +353,211 @@ namespace Scacchi.Modello
         Assert.False(esito);
         }
 
+        [Fact]
+        public void LAlfiereMuoveAvantiADestradiUnaCasa()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.E,
+        traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveAvantiADestradiDueCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Settima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveAvantiADestradiTreCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.G,
+        traversaArrivo: Traversa.Ottava);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveAvantiASinistradiUnaCasa()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveAvantiASinistradiDueCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Settima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveAvantiASinistradiTreCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.A,
+        traversaArrivo: Traversa.Ottava);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LAlfiereMuoveIndietroADestradiUnaCasa()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.E,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveIndietroADestradiDueCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveIndietroADestradiTreCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.G,
+        traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LAlfiereMuoveIndietroADestradiQuattroCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.H,
+        traversaArrivo: Traversa.Prima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveIndietroASinistradiUnaCasa()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveIndietroASinstradiDueCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LAlfiereMuoveIndietroASinistradiTreCase()
+        {
+        //Given
+        Alfiere alfiere = new Alfiere(Colore.Nero);
+        //When
+        bool esito = alfiere.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.A,
+        traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
 
 
 
