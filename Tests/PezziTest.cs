@@ -686,6 +686,457 @@ namespace Scacchi.Modello
         //Then
         Assert.False(esito);
         }
+        
+        [Fact]
+        public void LaDonnaMuoveAvantidiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void LaDonnaMuoveAvantiADestradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void LaDonnaMuoveAvantiASinistradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void LaDonnaMuoveASinistradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+        
+        [Fact]
+        public void LaDonnaMuoveADestradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+        
+        [Fact]
+        public void LaDonnaMuoveIndietrodiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void LaDonnaMuoveIndietroADestradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void LaDonnaMuoveIndieitroASinistradiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveAvantiDiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroDiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveAvantiDiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroDiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveAvantiDiQuattroCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Ottava);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroDiTreCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Prima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveASinistraDiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.E,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveADestraDiUnaCasa()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.G,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveASinistraDiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveADestraDiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.H,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveASinistraDiQuattroCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveASinistraDiCinqueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.A,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        public void LaDonnaNonPuòRimanereFermaUnaVoltaScelta()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Bianco);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.False(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveAvantiADestradiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Settima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveAvantiADestradiTreCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.G,
+        traversaArrivo: Traversa.Ottava);
+        //Then
+        Assert.True(esito);
+        }
+        
+        [Fact]
+        public void LaDonnaMuoveAvantiASinistradiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Settima);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveAvantiASinistradiTreCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.A,
+        traversaArrivo: Traversa.Ottava);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroADestradiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveIndietroADestradiTreCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.G,
+        traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroADestradiQuattroCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.H,
+        traversaArrivo: Traversa.Prima);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveIndietroASinstradiDueCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        
+        [Fact]
+        public void LaDonnaMuoveIndietroASinistradiTreCase()
+        {
+        //Given
+        Donna donna = new Donna(Colore.Nero);
+        //When
+        bool esito = donna.PuòMuovere(
+        colonnaPartenza: Colonna.D,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.A,
+        traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
 
 
 
