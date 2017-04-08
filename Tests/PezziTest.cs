@@ -37,5 +37,127 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
+
+        [Fact]
+        public void IlCavalloPuòMuovereAvantiASinistraDiDueCase()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.C,
+            traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.True(esito);
+        }
+
+                [Fact]
+        public void IlCavalloPuòMuovereAvantiADestraDiDueCase()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.E,
+            traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereIndietroASinistraDiDueCase()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.C,
+            traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereIndietroADestraDiDueCase()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.E,
+            traversaArrivo: Traversa.Seconda);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereADestraAvantiDiUnaCasa()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.F,
+            traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereADestraIndietroDiUnaCasa()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.F,
+            traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereASinistraAvantiDiUnaCasa()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void IlCavalloPuòMuovereASinistraIndietroDiUnaCasa()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Nero);
+        //When
+        bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+
+
     }
 }
