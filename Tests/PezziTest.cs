@@ -558,6 +558,135 @@ namespace Scacchi.Modello
         Assert.True(esito);
         }
 
+        [Fact]
+        public void IlReMuoveAvantidiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReMuoveAvantiADestradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReMuoveAvantiASinistradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReMuoveASinistradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+        
+        [Fact]
+        public void IlReMuoveADestradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Quarta);
+        //Then
+        Assert.True(esito);
+        }
+        
+        [Fact]
+        public void IlReMuoveIndietrodiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReMuoveIndietroADestradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.D,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReMuoveIndieitroASinistradiUnaCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.B,
+        traversaArrivo: Traversa.Terza);
+        //Then
+        Assert.True(esito);
+        }
+        [Fact]
+        public void IlReNonMuovediDueCasa()
+        {
+        //Given
+        Re re = new Re(Colore.Bianco);
+        //When
+        bool esito = re.PuòMuovere(
+        colonnaPartenza: Colonna.C,
+        traversaPartenza: Traversa.Quarta,
+        colonnaArrivo: Colonna.C,
+        traversaArrivo: Traversa.Sesta);
+        //Then
+        Assert.False(esito);
+        }
+
 
 
 
