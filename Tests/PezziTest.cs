@@ -339,6 +339,20 @@ namespace Scacchi.Modello
         Assert.True(esito);
         }
 
+        public void LaTorreNonPuòRimanereFermaUnaVoltaScelta()
+        {
+        //Given
+        Torre torre = new Torre(Colore.Bianco);
+        //When
+        bool esito = torre.PuòMuovere(
+        colonnaPartenza: Colonna.F,
+        traversaPartenza: Traversa.Quinta,
+        colonnaArrivo: Colonna.F,
+        traversaArrivo: Traversa.Quinta);
+        //Then
+        Assert.False(esito);
+        }
+
 
 
 
