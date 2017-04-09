@@ -96,8 +96,7 @@ namespace Scacchi.Modello
         public void Avvia()
         {
             if(!acceso)
-                throw new InvalidOperationException(
-                    "L'Orologio deve essere acceso, per poter essere avviato!");
+                throw new InvalidOperationException("L'Orologio deve essere acceso, per poter essere avviato!");
             partenzaOrologio = DateTime.Now;
             inPausa = false;
         }

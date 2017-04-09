@@ -1,6 +1,6 @@
 namespace Scacchi.Modello
 {
-    public enum Traversa
+    public enum Traversa : int
     {
         Prima = 1,
         Seconda = 2,
