@@ -2,24 +2,22 @@
 Applicazione che consentirà all'eterna sfida Bob VS Ross di avere luogo.
 
 ## Situazione attuale
-Dopo una breve pianificazione iniziale, abbiamo iniziato a modellare gli oggetti di una partita di scacchi usando delle `interface`. Dopo questa prima prototipazione, siamo passati ad implementare il comportamento della classe `Orologio`, che implementa `IOrologio`.
+Abbiamo implementato la [classe Orologio](Modello/Orologio.cs) e abbiamo verificato che il suo funzionamento fosse aderente alla [specifica](Documenti/SpecificaOrologio.md) usando degli [unit test](Tests/OrologioTest.cs).
+
+Ora proviamo ad implementare il comportamento dei vari **pezzi degli scacchi**. Nella cartella Modello/Pezzi si trova l'[interfaccia IPezzo](Modello/Pezzi/IPezzo.cs) che espone due membri:
+ * Il metodo booleano **PuòMuovere**, che ci indica se il pezzo può compiere una certa mossa, date [Colonna](Modello/Colonna.cs) e [Traversa](Modello/Traversa.cs) di partenza e di arrivo (Colonna e Traversa sono delle enum);
+ * La proprietà **Colore**, di tipo [Colore](Modello/Colore.cs) che indica se il pezzo è bianco o nero (Colore è un'enum).
 
 ## Obiettivo
-Aprire il file `Modello\Orologio.cs` e continuare con l'implementazione, provando a realizzare la specifica di un orologio per scacchi:
-1. Quando l'utente accende l'orologio, entrambi i tempi residui devono essere impostati su 5 minuti;
-2. Quando avvia l'orologio, il tempo inizierà a decrescere per il Giocatore1;
-3. Quando mette in pausa l'orologio, il tempo non deve decrescere;
-4. Quando avvia l'orologio mentre era in pausa, il tempo deve ricominciare a decrescere per il giocatore che era di turno;
-5. Quando si cambia giocatore, il tempo deve arrestarsi per il giocatore precedente ed iniziare a decrescere per il giocatore attualmente di turno;
-6. Quando resetta l'orologio, il tempo deve essere reimpostato a 5 minuti per entrambi i giocatori. Il tempo residuo resterà fermo per entrambi i giocatori finché l'utente non lo avvia;
-6. *Nice-to-have*: Se si prova ad avviare l'orologio senza averlo prima acceso, deve essere sollevata un'eccezione (es.  `throw new InvalidOperationException("Prima devi accenderlo");`). L'eccezione impedirà la normale esecuzione del programma e questo sarà utile ad informare altri sviluppatori che usano la vostra classe `Orologio` sul corretto uso della classe. Possiamo intenderla come un'estrema forma di documentazione;
-7. *Nice-to-have*: Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero. Questo non vi ho ancora spiegato come realizzarlo, quindi lo vedremo durante la prossima lezione, oltre ad una revisione delle vostre implementazioni. Nel frattempo, potete usarlo come esercizio di ricerca su StackOverflow :P
+Usare il [test-driven development](https://it.wikipedia.org/wiki/Test_driven_development) per modellare le classi Pedone, Cavallo, Torre, Alfiere, Re e Donna (il nome usato dagli scacchisti al posto di Regina). Creare tali classi nella cartella Modello/Pezzi ([la classe Pedone](Modello/Pezzi/Pedone.cs) già esiste).
 
-## Esempio di orologio per scacchi da tenere alla mano durante la modellazione
-Questo particolare orologio ha:
-* Due tasti per cambiare il tono o il volume dell'allarme (che è irrilevante per noi e che perciò non modelleremo);
-* Un unico tasto per avviare e mettere in pausa;
-* Un tasto per resettare il timer;
-* Un tasto posteriore (qui non visibile) per accedere l'orologio. L'orologio si spegne automaticamente dopo alcuni minuti di inattività;
-* Un tastone basculante superiore che serve a passare il turno all'altro giocatore. In questa immagine, è di turno il giocatore che ha i pezzi neri (perciò sta decrescendo il suo tempo residuo).
-![Immagine di un orologio per scacchi](Immagini/orologio.jpg)
+Ciascuna di queste classi dovrà implementare  l'[interfaccia IPezzo](Modello/Pezzi/IPezzo.cs) e il suo funzionamento dovrà essere conforme alla [specifica](Documenti/SpecificaPezzi.md).
+
+Procedere come segue:
+ * Si legge il primo punto della [specifica](Documenti/SpecificaPezzi.md);
+ * Si scrive un test nella [classe PezziTest](Tests/PezziTest.cs) completo di istruzioni Assert. Lanciare l'applicazione per veder fallire il test (è chiamata "fase rossa");
+ * Solo a questo punto, aprire la classe del pezzo in questione (es. [Modello/Pezzi/Pedone.cs](Modello/Pezzi/Pedone.cs) e scrivere la minima quantità di codice che serve a far passare il test;
+ * Lanciare di nuovo il programma e verificare che il test è passato (è chiamata "fase verde");
+ * Ripetere da capo tutti i passi finché non sono stati svolti tutti i punti della specifica. Tenere presente che per testare ogni punto della specifica potrebbero essere necessari uno o più test.
+
+*Nota:* Sono già stati scritti due test per il primo punto della [specifica](Documenti/SpecificaPezzi.md), ma il secondo sta fallendo. Scrivere il codice in [Modello/Pezzo.cs](Modello/Pezzo.cs) per farlo passare e poi proseguire con i successivi punti della specifica.

@@ -1,73 +1,128 @@
 using System;
+using System.Threading;
 
 namespace Scacchi.Modello
 {
     public class Orologio : IOrologio
     {
-        private TimeSpan tempoResiduoGiocatore1;
-        public TimeSpan TempoResiduoGiocatore1
+        private const int tempoInizialeInMinutiDefault = 5;
+        private readonly TimeSpan tempoIniziale;
+
+        private readonly Timer timer;
+
+        public Orologio() : this(TimeSpan.FromMinutes(tempoInizialeInMinutiDefault))
         {
-            get
-            {
-                TempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti) - (DateTime.Now - partenzaOrologio);
-                return tempoResiduoGiocatore1;
-            }
-            private set
-            {
-                tempoResiduoGiocatore1 = value;
+        }
+
+        internal Orologio(TimeSpan tIniziale)
+        {
+            this.tempoIniziale = tIniziale;
+            timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
+        }
+
+        private void ControllaTempoResiduo(object state)
+        {
+            if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
+                inPausa = true;
+                TempoScaduto?.Invoke(this, null);
             }
         }
 
-        private TimeSpan tempoResiduoGiocatore2;
-        public TimeSpan TempoResiduoGiocatore2
+        
+        public TimeSpan TempoIniziale {
+            get{
+                return tempoIniziale;
+            }
+        }
+        private TimeSpan tempoResiduoBianco;
+        public TimeSpan TempoResiduoBianco
         {
             get
             {
-                return tempoResiduoGiocatore2;
+
+                if(TurnoAttuale == Colore.Bianco && !inPausa)
+                    TempoResiduoBianco = 
+                        tempoIniziale - (DateTime.Now - partenzaOrologio);
+                return tempoResiduoBianco;
             }
             private set
             {
-                tempoResiduoGiocatore2 = value;
+                tempoResiduoBianco = value;
             }
         }
 
-        private TurnoGiocatore turnoGiocatore = TurnoGiocatore.Giocatore1;
-        public TurnoGiocatore TurnoGiocatore
+        private TimeSpan tempoResiduoNero;
+        public TimeSpan TempoResiduoNero
         {
             get
             {
-                return turnoGiocatore;
+                if(TurnoAttuale == Colore.Nero && !inPausa)
+                    tempoResiduoNero = 
+                        tempoIniziale - (DateTime.Now - partenzaOrologio);
+                return tempoResiduoNero;
+            }
+            private set
+            {
+                tempoResiduoNero = value;
+            }
+        }
+
+        private Colore turnoAttuale = Colore.Bianco;
+        public Colore TurnoAttuale
+        {
+            get
+            {
+                return turnoAttuale;
             }
             set
             {
-                turnoGiocatore = value;
+                turnoAttuale = value;
             }
         }
 
 
         public event EventHandler TempoScaduto;
 
-        private const int tempoInizialeInMinuti = 5;
+        private bool acceso = false;
         public void Accendi()
         {
+            acceso = true;
+            inPausa = true;
             Reset();
         }
 
-private DateTime partenzaOrologio = DateTime.MinValue;
+        private DateTime partenzaOrologio = DateTime.MinValue;
+        private bool inPausa = true;
         public void Avvia()
         {
+            if(!acceso)
+                throw new InvalidOperationException(
+                    "L'Orologio deve essere acceso, per poter essere avviato!");
             partenzaOrologio = DateTime.Now;
+            inPausa = false;
         }
 
         public void Pausa()
         {
-            throw new NotImplementedException();
+            inPausa = true;
+        }
+
+        public void FineTurno() {
+            if(TurnoAttuale == Colore.Bianco) {
+                tempoResiduoBianco = tempoIniziale;
+                TurnoAttuale = Colore.Nero;
+            } else {
+                TempoResiduoNero = tempoIniziale;
+                TurnoAttuale = Colore.Bianco;
+            }
+            Avvia();
         }
 
         public void Reset()
         {
-            TempoResiduoGiocatore1 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
-            TempoResiduoGiocatore2 = TimeSpan.FromMinutes(tempoInizialeInMinuti);
+            Pausa();
+            TempoResiduoBianco = tempoIniziale;
+            TempoResiduoNero = tempoIniziale;
         }
     }
 }

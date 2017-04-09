@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\Scacchi.csproj"
+                "${workspaceRoot}/UnicamScacchi.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
