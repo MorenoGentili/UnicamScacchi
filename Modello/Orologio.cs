@@ -22,8 +22,10 @@ namespace Scacchi.Modello
 
         private void ControllaTempoResiduo(object state)
         {
-            if (TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero)
-                  TempoScaduto?.Invoke(this, null);
+            if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
+                inPausa = true;
+                TempoScaduto?.Invoke(this, null);
+            }
         }
 
         
@@ -90,7 +92,7 @@ namespace Scacchi.Modello
         }
 
         private DateTime partenzaOrologio = DateTime.MinValue;
-        private bool inPausa = false;
+        private bool inPausa = true;
         public void Avvia()
         {
             if(!acceso)
