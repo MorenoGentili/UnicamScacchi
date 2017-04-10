@@ -130,10 +130,15 @@ namespace Scacchi.Modello
                         traversaPartenza: Traversa.Prima,
                         colonnaArrivo: Colonna.C,
                         traversaArrivo: Traversa.Quarta);
+            bool controlloArrivoPartenza = donna.PuòMuovere(colonnaPartenza: Colonna.A,
+                        traversaPartenza: Traversa.Prima,
+                        colonnaArrivo: Colonna.A,
+                        traversaArrivo: Traversa.Prima);
             //Then
             Assert.True(diagonale);
             Assert.True(traversa);
             Assert.True(colonna);
+            Assert.False(controlloArrivoPartenza);
             Assert.False(caso);
         }
 
@@ -158,20 +163,20 @@ namespace Scacchi.Modello
         [Fact]
         public void RePuoMuovereDiUnaCasa()
         {
-        //Given
-        Re re = new Re(Colore.Bianco);
-        //When
-        bool esito = re.PuòMuovere(colonnaPartenza: Colonna.D,
-                            traversaPartenza: Traversa.Prima,
-                            colonnaArrivo: Colonna.C,
-                            traversaArrivo: Traversa.Seconda);
-        bool caso = re.PuòMuovere(colonnaPartenza: Colonna.A,
-                            traversaPartenza: Traversa.Prima,
-                            colonnaArrivo: Colonna.B,
-                            traversaArrivo: Traversa.Quarta);
-        //Then
-        Assert.True(esito);
-        Assert.False(caso);
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(colonnaPartenza: Colonna.D,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.C,
+                                traversaArrivo: Traversa.Seconda);
+            bool caso = re.PuòMuovere(colonnaPartenza: Colonna.A,
+                                traversaPartenza: Traversa.Prima,
+                                colonnaArrivo: Colonna.B,
+                                traversaArrivo: Traversa.Quarta);
+            //Then
+            Assert.True(esito);
+            Assert.False(caso);
         }
     }
 }
