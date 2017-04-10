@@ -19,7 +19,7 @@ namespace Scacchi.Modello.Pezzi {
             // var stessaTraversa = traversaPartenza == traversaArrivo;
             var distanzaTraLeTraverse = Math.Abs((int)(traversaArrivo - traversaPartenza));
             var distanzaTraLeColonne = Math.Abs((int)(colonnaArrivo - colonnaPartenza));
-            if((distanzaTraLeColonne == 2 && distanzaTraLeTraverse == 1)||(distanzaTraLeColonne == 1 && distanzaTraLeTraverse == 2)){
+            if((distanzaTraLeColonne == 2 && distanzaTraLeTraverse == 1) || (distanzaTraLeColonne == 1 && distanzaTraLeTraverse == 2)){
                 return true;
             } else {
                 return false;

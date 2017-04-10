@@ -156,9 +156,15 @@ namespace Scacchi.Modello
                             traversaPartenza: Traversa.Prima,
                             colonnaArrivo: Colonna.C,
                             traversaArrivo: Traversa.Quarta);
+
+            bool dudadue = cavallo.PuòMuovere(colonnaPartenza: Colonna.G,
+                            traversaPartenza: Traversa.Prima,
+                            colonnaArrivo: Colonna.E,
+                            traversaArrivo: Traversa.Terza);
             //Then
             Assert.True(esito);
             Assert.False(caso);
+            Assert.False(dudadue);
         }
         [Fact]
         public void RePuoMuovereDiUnaCasa()
