@@ -14,12 +14,11 @@ namespace Scacchi.Modello
         {
         }
 
-        internal Orologio(TimeSpan tIniziale)
+        internal Orologio(TimeSpan tempoIniziale)
         {
-            inPausa = true;
-            this.tempoIniziale = tIniziale;
+            Pausa();
+            this.tempoIniziale = tempoIniziale;
             timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
-
         }
 
         private void ControllaTempoResiduo(object state)
@@ -88,21 +87,20 @@ namespace Scacchi.Modello
             }
         }
 
-public override string ToString() {
-    return $"Orologio con tempo iniziale di {this.tempoIniziale}";
-}
+        public override string ToString() {
+            return $"Orologio con tempo iniziale di {this.tempoIniziale}";
+        }
         public event EventHandler<Colore> TempoScaduto;
 
         private bool acceso = false;
         public void Accendi()
         {
             acceso = true;
-            inPausa = true;
             Reset();
         }
 
         private DateTime partenzaOrologio = DateTime.MinValue;
-        private bool inPausa = true;
+        private bool inPausa;
         public void Avvia()
         {
             if(!acceso)

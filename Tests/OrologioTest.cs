@@ -169,6 +169,39 @@ namespace Scacchi.Tests {
         //Then
         Assert.True(invocato);
         }
+
+        //Questo test è "anomalo" perché non testa il nostro codice ma va a verificare
+        //come si comporta l'EventHandler, una classe scritta da Microsoft
+        //Ovviamente Microsoft ha già testato l'EventHandler e non è necessario che lo facciamo anche noi
+        //Comunque, teniamo qui questo test giusto come esercizio e per ricordarci di come si
+        //sottoscrivono gli eventi.
+        private int sottoscrittoriInvocati = 0;
+        [Fact]
+        public void TempoScadutoDeveNotificareTuttiISuoiSottoscrittori(){
+
+        //Given        
+        IOrologio orologio = new Orologio(TimeSpan.FromMilliseconds(50));
+        orologio.Accendi();
+        orologio.Avvia();
+
+        orologio.TempoScaduto += NotificaSconfitta;
+        //Oltre che sottoscrivere un evento con un metodo, posso anche indicare una lambda expression
+        orologio.TempoScaduto += (sender, colore) => {
+                sottoscrittoriInvocati++;
+        };   
+        //When
+        Thread.Sleep(TimeSpan.FromMilliseconds(200));
+        //Then
+        //Mi aspetto che vengano invocati entrambi i metodi che ho sottoscritto all'evento
+        //1. Il metodo NotificaSconfitta definito in questa classe
+        //2. La lambda expression (che è un metodo anonimo)
+        Assert.Equal(2, sottoscrittoriInvocati);
+        }
+
+        private void NotificaSconfitta(object sender, Colore e)
+        {
+            sottoscrittoriInvocati++;
+        }
     }
 
 }
