@@ -20,6 +20,5 @@ namespace Scacchi
             Console.WriteLine($"(Dal metodo): Il giocatore {colore} ha perso la partita, secondo l'orologio {sender}!");
         }
         */
-        
     }
 }
