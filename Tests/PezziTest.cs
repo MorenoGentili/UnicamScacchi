@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Scacchi.Modello.Pezzi;
 using Xunit;
 
@@ -22,20 +24,16 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void IlPedoneNeroPuoMuovereAvantiDiUnaCasa()
-        {
+        [Theory]
+        [InlineData(typeof(Donna))]
+        [InlineData(typeof(Pedone))]
+        public void IlPedoneNonPuòRestareFermo(Type t) {
             //Given
-            Pedone pedone = new Pedone(Colore.Nero);
+            IPezzo pezzo = Activator.CreateInstance(t, Colore.Bianco) as IPezzo;
             //When
-            bool esito = pedone.PuòMuovere(
-                colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Settima,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Sesta);
-
+            bool esito = pezzo.PuòMuovere(Colonna.A, Traversa.Prima, Colonna.A, Traversa.Prima);
             //Then
-            Assert.True(esito);
+            Assert.True(esito, t.Name);
         }
     }
 }

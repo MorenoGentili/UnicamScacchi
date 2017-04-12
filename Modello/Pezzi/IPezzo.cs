@@ -9,7 +9,8 @@ namespace Scacchi.Modello.Pezzi
         bool PuòMuovere(Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
-            Traversa traversaArrivo);
+            Traversa traversaArrivo,
+            IScacchiera scacchiera = null);
         Colore Colore { get; }
     }
 }
