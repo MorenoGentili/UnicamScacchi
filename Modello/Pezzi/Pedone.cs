@@ -20,7 +20,12 @@ namespace Scacchi.Modello.Pezzi {
             Traversa traversaArrivo)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
-            var distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
+            int distanzaTraLeTraverse;
+            if(Colore == Colore.Bianco){
+            distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
+            }else{
+            distanzaTraLeTraverse =  (int) traversaPartenza - (int) traversaArrivo;
+            }
 
             if (stessaColonna && distanzaTraLeTraverse == 1){
                 return true;

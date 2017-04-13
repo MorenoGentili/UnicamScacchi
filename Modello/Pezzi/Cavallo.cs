@@ -1,12 +1,11 @@
 using System;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Donna : IPezzo
+    public class Cavallo : IPezzo
     {
         private readonly Colore colore;
-        public Donna(Colore colore)
+        public Cavallo(Colore colore)
         {
-
             this.colore = colore;    
         }
         public Colore Colore {
@@ -22,13 +21,20 @@ namespace Scacchi.Modello.Pezzi {
         {
             var differenzaColonne = colonnaPartenza - colonnaArrivo;
             var differenzaTraverse = (int) traversaPartenza - (int) traversaArrivo;
-            var stessaColonna = colonnaPartenza == colonnaArrivo;
-            var stessaTraversa = traversaPartenza == traversaArrivo;
-            if((Math.Abs(differenzaColonne) <= 1 && Math.Abs(differenzaTraverse) <= 1) || ((stessaTraversa && !stessaColonna) 
-            || (stessaColonna && !stessaTraversa)) || ((Math.Abs(differenzaColonne) - Math.Abs(differenzaTraverse)) == 0) )
-            {
-            return true;
-            }else{
+            if(differenzaTraverse == 2 || differenzaTraverse == -2){
+                if(differenzaColonne == 1 || differenzaColonne == -1){
+                    return true;
+                } else{
+                    return false;
+                }
+            } else if(differenzaColonne == 2 || differenzaColonne == -2){
+                
+                if(differenzaTraverse == 1 || differenzaTraverse == -1){
+                    return true;
+                } else{
+                    return false;
+                }
+            } else{
                 return false;
             }
         }
