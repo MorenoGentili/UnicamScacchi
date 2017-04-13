@@ -24,16 +24,94 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Theory]
-        [InlineData(typeof(Donna))]
-        [InlineData(typeof(Pedone))]
-        public void IlPedoneNonPuòRestareFermo(Type t) {
+
+        [Fact]
+        public void IlPedoneNonPuòRestareFermo() {
             //Given
-            IPezzo pezzo = Activator.CreateInstance(t, Colore.Bianco) as IPezzo;
+            Pedone pedone = new Pedone(Colore.Bianco);
             //When
-            bool esito = pezzo.PuòMuovere(Colonna.A, Traversa.Prima, Colonna.A, Traversa.Prima);
-            //Then
-            Assert.True(esito, t.Name);
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
+        }
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LAlfiereNonPuòRestareFermo(Colore c) {
+            //Given
+            Alfiere alfiere = new Alfiere(c);
+            //When
+            bool esito = alfiere.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
+        }
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlCavalloNonPuòRestareFermo(Colore c) {
+            //Given
+            Cavallo cavallo = new Cavallo(c);
+            //When
+            bool esito = cavallo.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
+        }
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaDonnaNonPuòRestareFerma(Colore c) {
+            //Given
+            Donna donna = new Donna(c);
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
+        }
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlReNonPuòRestareFermo(Colore c) {
+            //Given
+            Re re = new Re(c);
+            //When
+            bool esito = re.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
+        }
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuòRestareFerma(Colore c) {
+            //Given
+            var torre = new Torre(c);
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Prima
+            );
+            Assert.False(esito);
         }
 
         [Fact]
@@ -1135,7 +1213,22 @@ namespace Scacchi.Modello
         Assert.True(esito);
         }
 
-
+        [Fact]
+        public void IlPedoneBiancoPuoMuovereDiagonalmenteSeCatturaUnPezzo()
+        {
+        //Given
+        var pedone = new Pedone(Colore.Bianco);
+        var pedoneNero = new Pedone(Colore.Nero);
+        //When
+        bool esito = pedone.PuòMuovere(
+            colonnaPartenza: Colonna.C,
+            traversaPartenza: Traversa.Terza,
+            colonnaArrivo: Colonna.D,
+            traversaArrivo: Traversa.Quarta
+        );
+        //Then
+        Assert.True(esito);
+        }
 
 
 

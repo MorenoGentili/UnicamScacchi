@@ -1,15 +1,18 @@
 using System;
 
-namespace Scacchi.Modello.Pezzi {
+namespace Scacchi.Modello.Pezzi
+{
     public class Alfiere : IPezzo
     {
         private readonly Colore colore;
         public Alfiere(Colore colore)
         {
-            this.colore = colore;    
+            this.colore = colore;
         }
-        public Colore Colore {
-            get {
+        public Colore Colore
+        {
+            get
+            {
                 return colore;
             }
         }
@@ -17,14 +20,19 @@ namespace Scacchi.Modello.Pezzi {
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
-            Traversa traversaArrivo)
+            Traversa traversaArrivo,
+            IScacchiera scacchiera = null)
         {
             var differenzaColonne = colonnaPartenza - colonnaArrivo;
-            var differenzaTraverse = (int) traversaPartenza - (int) traversaArrivo;
-            if((Math.Abs(differenzaColonne) - Math.Abs(differenzaTraverse)) == 0)
+            var differenzaTraverse = (int)traversaPartenza - (int)traversaArrivo;
+            if (differenzaColonne == 0 && differenzaTraverse == 0)
+                return false;
+            if ((Math.Abs(differenzaColonne) - Math.Abs(differenzaTraverse)) == 0)
             {
-            return true;
-            }else{
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }

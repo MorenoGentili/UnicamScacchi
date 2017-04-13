@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace Scacchi.Modello
 {
     public interface IScacchiera
     {
-        ICasa[] Casa { get; set; }
+        IEnumerable<ICasa> Case { get; }
+        ICasa this[Colonna colonna, Traversa traversa] { get; }
     }
 }
