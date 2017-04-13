@@ -20,15 +20,15 @@ Ogni set di pezzi (che sia bianco o nero) è composto di pedoni, torri, alfieri,
 
 10. La Torre non può scavalcare gli altri pezzi nel suo movimento orizzontale o verticale. Questo significa che è costretta a muoversi solo fino alla casa precedente a quella in cui si trova un pezzo dello stesso colore, oppure occupa la stessa casa in cui si trova un pezzo dell'altro colore, catturandolo;
 
-![Mossa](../Immagini/Mosse/scacchiera-10a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-10c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-10b.jpg)
+![Mossa](../Immagini/Mosse/scacchiera-10d.jpg) ![Mossa](../Immagini/Mosse/scacchiera-10c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-10a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-10b.jpg)
 
 11. L'alfiere non può scavalcare gli altri pezzi nel suo movimento diagonale. Questo significa che è costretto a muoversi solo fino alla casa precedente a quella in cui si trova un pezzo dello stesso colore, oppure occupa la stessa casa in cui si trova un pezzo dell'altro colore, catturandolo;
 
-![Mossa](../Immagini/Mosse/scacchiera-11a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-11c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-11b.jpg)
+![Mossa](../Immagini/Mosse/scacchiera-11d.jpg) ![Mossa](../Immagini/Mosse/scacchiera-11c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-11a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-11b.jpg)
 
 12. La Donna non può scavalcare gli altri pezzi nel suo movimento orizzontale, verticale o diagonale. Questo significa che è costretta a muoversi solo fino alla casa precedente a quella in cui si trova un pezzo dello stesso colore, oppure occupa la casa in cui si trova un pezzo dell'altro colore, catturandolo.
 
-![Mossa](../Immagini/Mosse/scacchiera-12a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-12c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-12b.jpg)
+![Mossa](../Immagini/Mosse/scacchiera-12d.jpg) ![Mossa](../Immagini/Mosse/scacchiera-12c.jpg) ![Mossa](../Immagini/Mosse/scacchiera-12a.jpg) ![Mossa](../Immagini/Mosse/scacchiera-12b.jpg)
 
 13. Il cavallo può scavalcare i pezzi nel suo movimento ad L ma non può muoversi in case in cui si trova un pezzo dello stesso colore. Se invece nella casa in cui va a muoversi c'è un pezzo di colore diverso, lo cattura.
 
