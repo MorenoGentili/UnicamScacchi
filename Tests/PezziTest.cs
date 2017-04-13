@@ -174,7 +174,7 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-         //test per la regina
+        //test per la regina
         [Fact]
         public void LaReginaBiancaSiPuoMuovereOrizzontalmenteDoveVuole()
         {
@@ -189,7 +189,7 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-         //test per la regina
+        //test per la regina
         [Fact]
         public void LaReginaBiancaSiPuoDiagonalmenteDoveVuole()
         {
@@ -206,7 +206,7 @@ namespace Scacchi.Modello
         }
 
 
-//test per la regina
+        //test per la regina
         [Fact]
         public void LaReginaNeraSiPuoMuovereVerticalmenteDoveVuole()
         {
@@ -221,7 +221,7 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-         //test per la regina
+        //test per la regina
         [Fact]
         public void LaReginaNeraSiPuoMuovereOrizzontalmenteDoveVuole()
         {
@@ -236,7 +236,7 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-         //test per la regina
+        //test per la regina
         [Fact]
         public void LaReginaNeraSiPuoDiagonalmenteDoveVuole()
         {
@@ -253,7 +253,7 @@ namespace Scacchi.Modello
         }
 
 
-         //test per il cavallo
+        //test per il cavallo
         [Fact]
         public void IlCavalloBiancoSiMuoveAdL()
         {
@@ -269,7 +269,7 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-         //test per il cavallo
+        //test per il cavallo
         [Fact]
         public void IlCavalloNeroSiMuoveAdL()
         {
@@ -285,7 +285,7 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-         //test per il re
+        //test per il re
         [Fact]
         public void IlReNeroSiMuoveOrizzontalmenteDiUnaSolaCasa()
         {
@@ -334,7 +334,7 @@ namespace Scacchi.Modello
         }
 
 
-          //test per il re
+        //test per il re
         [Fact]
         public void IlReBiancoSiMuoveOrizzontalmenteDiUnaSolaCasa()
         {
@@ -380,6 +380,19 @@ namespace Scacchi.Modello
                         traversaArrivo: Traversa.Ottava);
             //Then
             Assert.True(esito);
+        }
+        [Fact]
+        public void IlPedoneNonpuòRimanereFermo()
+        {
+            //Given
+            Pedone pedone = new Pedone(Colore.Bianco);
+            //When
+            bool esito = pedone.PuòMuovere(colonnaPartenza: Colonna.F,
+                            traversaPartenza: Traversa.Settima,
+                            colonnaArrivo: Colonna.F,
+                            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(!esito);
         }
 
     }

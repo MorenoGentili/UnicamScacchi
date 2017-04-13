@@ -1,5 +1,4 @@
 ﻿using System;
-using Scacchi.Modello;
 
 namespace Scacchi
 {
@@ -7,6 +6,7 @@ namespace Scacchi
     {
         static void Main(string[] args)
         {
+            //lancio i test 
             SimpleXUnitRunner.SimpleXUnit.RunTests();
             Console.ReadKey();
         }
