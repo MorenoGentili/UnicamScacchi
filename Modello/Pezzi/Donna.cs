@@ -6,6 +6,7 @@ namespace Scacchi.Modello.Pezzi {
         private readonly Colore colore;
         public Donna(Colore colore)
         {
+
             this.colore = colore;    
         }
         public Colore Colore {

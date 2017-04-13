@@ -14,16 +14,25 @@ namespace Scacchi.Modello
         {
         }
 
-        internal Orologio(TimeSpan tIniziale)
+        internal Orologio(TimeSpan tempoIniziale)
         {
-            this.tempoIniziale = tIniziale;
+            Pausa();
+            this.tempoIniziale = tempoIniziale;
             timer = new Timer(ControllaTempoResiduo, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(50));
         }
 
         private void ControllaTempoResiduo(object state)
         {
-            if (TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero)
-                  TempoScaduto?.Invoke(this, null);
+            if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
+                inPausa = true;
+
+                Colore colore = Colore.Bianco;
+                if (TempoResiduoNero <= TimeSpan.Zero) {
+                    colore = Colore.Nero;
+                }
+
+                TempoScaduto?.Invoke(this, colore);
+            }
         }
 
         
@@ -78,19 +87,20 @@ namespace Scacchi.Modello
             }
         }
 
-
-        public event EventHandler TempoScaduto;
+        public override string ToString() {
+            return $"Orologio con tempo iniziale di {this.tempoIniziale}";
+        }
+        public event EventHandler<Colore> TempoScaduto;
 
         private bool acceso = false;
         public void Accendi()
         {
             acceso = true;
-            inPausa = true;
             Reset();
         }
 
         private DateTime partenzaOrologio = DateTime.MinValue;
-        private bool inPausa = false;
+        private bool inPausa;
         public void Avvia()
         {
             if(!acceso)
