@@ -25,12 +25,7 @@ namespace Scacchi.Modello
         {
             if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
                 inPausa = true;
-
-                Colore colore = Colore.Bianco;
-                if (TempoResiduoNero <= TimeSpan.Zero) {
-                    colore = Colore.Nero;
-                }
-
+                Colore colore = TempoResiduoBianco <= TimeSpan.Zero ? Colore.Bianco : Colore.Nero;
                 TempoScaduto?.Invoke(this, colore);
             }
         }
@@ -90,6 +85,7 @@ namespace Scacchi.Modello
         public override string ToString() {
             return $"Orologio con tempo iniziale di {this.tempoIniziale}";
         }
+
         public event EventHandler<Colore> TempoScaduto;
 
         private bool acceso = false;
@@ -104,8 +100,7 @@ namespace Scacchi.Modello
         public void Avvia()
         {
             if(!acceso)
-                throw new InvalidOperationException(
-                    "L'Orologio deve essere acceso, per poter essere avviato!");
+                throw new InvalidOperationException("L'Orologio deve essere acceso, per poter essere avviato!");
             partenzaOrologio = DateTime.Now;
             inPausa = false;
         }

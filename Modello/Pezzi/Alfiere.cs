@@ -1,7 +1,6 @@
 using System;
 
-namespace Scacchi.Modello.Pezzi
-{
+namespace Scacchi.Modello.Pezzi {
     public class Alfiere : IPezzo
     {
         private readonly Colore colore;

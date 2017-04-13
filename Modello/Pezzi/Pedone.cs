@@ -20,20 +20,34 @@ namespace Scacchi.Modello.Pezzi {
             Traversa traversaArrivo,
             IScacchiera scacchiera = null)
         {
+            // nel caos il pedone si vuole muovere nella stessa colonna
             var stessaColonna = colonnaPartenza == colonnaArrivo;
-            int distanzaTraLeTraverse;
-            if(Colore == Colore.Bianco){
-            distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
-            }else{
-            distanzaTraLeTraverse =  (int) traversaPartenza - (int) traversaArrivo;
-            }
 
-            if (stessaColonna && distanzaTraLeTraverse == 1){
-                return true;
-            } else {
+            var distanzaTraLeTraverse = (int)(traversaArrivo - traversaPartenza);
+
+            if(this.colore == Colore.Nero){
+                if(stessaColonna && distanzaTraLeTraverse == -2 && traversaPartenza == Traversa.Settima){
+                    return true;
+                }
+                if(stessaColonna && distanzaTraLeTraverse == -1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            if(this.colore == Colore.Bianco){
+                if(stessaColonna && distanzaTraLeTraverse == 2 && traversaPartenza == Traversa.Seconda){
+                    return true;
+                }
+                if(stessaColonna && distanzaTraLeTraverse == 1){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            else{
                 return false;
             }
-
         }
     }
 }
