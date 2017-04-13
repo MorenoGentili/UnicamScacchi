@@ -394,6 +394,58 @@ namespace Scacchi.Modello
             //Then
             Assert.True(!esito);
         }
+        [Fact]
+        public void IlCavalloNonpuòRimanereFermo()
+        {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            //When
+            bool esito = cavallo.PuòMuovere(colonnaPartenza: Colonna.F,
+                            traversaPartenza: Traversa.Settima,
+                            colonnaArrivo: Colonna.F,
+                            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(!esito);
+        }
+        [Fact]
+        public void IlReNonpuòRimanereFermo()
+        {
+            //Given
+            Re re = new Re(Colore.Bianco);
+            //When
+            bool esito = re.PuòMuovere(colonnaPartenza: Colonna.F,
+                            traversaPartenza: Traversa.Settima,
+                            colonnaArrivo: Colonna.F,
+                            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(!esito);
+        }
+        [Fact]
+        public void AlfiereNonpuòRimanereFermo()
+        {
+            //Given
+            Alfiere alfiere= new Alfiere(Colore.Bianco);
+            //When
+            bool esito = alfiere.PuòMuovere(colonnaPartenza: Colonna.F,
+                            traversaPartenza: Traversa.Settima,
+                            colonnaArrivo: Colonna.F,
+                            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(!esito);
+        }
+        [Fact]
+        public void ReginaNonpuòRimanereFermo()
+        {
+            //Given
+            Regina regina= new Regina(Colore.Bianco);
+            //When
+            bool esito = regina.PuòMuovere(colonnaPartenza: Colonna.F,
+                            traversaPartenza: Traversa.Settima,
+                            colonnaArrivo: Colonna.F,
+                            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(!esito);
+        }
 
     }
 }

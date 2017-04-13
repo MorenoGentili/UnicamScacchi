@@ -25,7 +25,10 @@ namespace Scacchi.Modello.Pezzi
             //nel senso che la differenza tra le colonne e le traverse in valore assoluto deve essere uguale!
             int distanzaColonne = Math.Abs((int)colonnaPartenza - (int)colonnaArrivo);
             int distanzaTraverse = Math.Abs((int)traversaPartenza - (int)traversaArrivo);
-
+            //l'alfiere non può rimanere fermo
+            if(colonnaArrivo==colonnaPartenza && traversaArrivo==traversaPartenza){
+                return false;
+            }
             if (distanzaColonne == distanzaTraverse)
             {
                 return true;
