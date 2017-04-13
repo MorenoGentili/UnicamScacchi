@@ -24,7 +24,8 @@ namespace Scacchi.Modello
         {
             if (!inPausa && TempoResiduoBianco <= TimeSpan.Zero || TempoResiduoNero <= TimeSpan.Zero) {
                 inPausa = true;
-                TempoScaduto?.Invoke(this, null);
+                Colore colore = TempoResiduoBianco <= TimeSpan.Zero ? Colore.Bianco : Colore.Nero;
+                TempoScaduto?.Invoke(this, colore);
             }
         }
 
@@ -81,7 +82,7 @@ namespace Scacchi.Modello
         }
 
 
-        public event EventHandler TempoScaduto;
+        public event EventHandler<Colore> TempoScaduto;
 
         private bool acceso = false;
         public void Accendi()
