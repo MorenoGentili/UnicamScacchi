@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Scacchi.Modello;
 
 namespace Scacchi
 {
@@ -10,5 +10,6 @@ namespace Scacchi
             SimpleXUnitRunner.SimpleXUnit.RunTests();
             Console.ReadKey();
         }
+
     }
 }
