@@ -1213,7 +1213,7 @@ namespace Scacchi.Modello
         Assert.True(esito);
         }
 
-        [Fact]
+        //[Fact]
         public void IlPedoneBiancoPuoMuovereDiagonalmenteSeCatturaUnPezzo()
         {
         //Given
