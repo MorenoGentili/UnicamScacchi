@@ -1,4 +1,6 @@
 
+using System;
+
 namespace Scacchi.Modello.Pezzi
 {
     public class Pedone : IPezzo
@@ -29,12 +31,19 @@ namespace Scacchi.Modello.Pezzi
                 //va bene 
                 //se sono qui va tutto bene e la partenza 
                 var stessaColonna = colonnaPartenza == colonnaArrivo;
-                var distanzaTraLeTraverse = (int)traversaPartenza - (int)traversaArrivo;
+                var distanzaTraLeTraverse = Math.Abs((int)traversaPartenza - (int)traversaArrivo);
+                var distanzaTraLeColonne = Math.Abs((int)colonnaArrivo - (int)colonnaPartenza);
                 //devo controllare la se la traversa di partenza è uguale a 2 perchè se 
                 //la par
                 if (stessaColonna && distanzaTraLeTraverse == 1)
                 {
                     return true;
+                }
+                //può muoversi diagonalmente solo se c'è una pedina
+                else if (distanzaTraLeColonne == 1 && distanzaTraLeTraverse == 1)
+                {
+                    return true;
+
                 }
                 else if (stessaColonna && distanzaTraLeTraverse == 2 && (int)traversaPartenza == 7)
                 {
@@ -54,9 +63,15 @@ namespace Scacchi.Modello.Pezzi
                 //se sono qui va tutto bene e la partenza 
                 var stessaColonna = colonnaPartenza == colonnaArrivo;
                 var distanzaTraLeTraverse = (int)traversaArrivo - (int)traversaPartenza;
+                var distanzaTraLeColonne = Math.Abs((int)colonnaArrivo - (int)colonnaPartenza);
                 //devo controllare la se la traversa di partenza è uguale a 2 perchè se 
                 //la par
                 if (stessaColonna && distanzaTraLeTraverse == 1)
+                {
+                    return true;
+                }
+                //può muoversi diagonalmente solo se c'è una pedina
+                else if (distanzaTraLeColonne == 1 && distanzaTraLeTraverse == 1)
                 {
                     return true;
                 }
@@ -75,6 +90,11 @@ namespace Scacchi.Modello.Pezzi
             return false;
 
 
+        }
+
+        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo, IScacchiera scacchiera = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

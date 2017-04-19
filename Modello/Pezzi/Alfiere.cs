@@ -29,7 +29,7 @@ namespace Scacchi.Modello.Pezzi
             if(colonnaArrivo==colonnaPartenza && traversaArrivo==traversaPartenza){
                 return false;
             }
-            if (distanzaColonne == distanzaTraverse)
+            else if (distanzaColonne == distanzaTraverse)
             {
                 return true;
             }
@@ -37,6 +37,11 @@ namespace Scacchi.Modello.Pezzi
             {
                 return false;
             }
+        }
+
+        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo, IScacchiera scacchiera = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -31,5 +31,10 @@ namespace Scacchi.Modello.Pezzi
             // se sono qui la posizione non è ammissibile
                 return false;
         }
+
+        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo, IScacchiera scacchiera = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

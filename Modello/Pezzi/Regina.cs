@@ -44,5 +44,10 @@ namespace Scacchi.Modello.Pezzi
             //Se sono qui la regina si sta spostando in una posizione non ammissibile!
             return false;
         }
+
+        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo, IScacchiera scacchiera = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
