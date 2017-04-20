@@ -1,5 +1,5 @@
 # Blocco note
-Il blocco note è l'oggetto usato per trascrivere le mosse dei giocatori secondo un particolare formato chiamato [notazione algebrica standard](https://it.wikipedia.org/wiki/Notazione_algebrica).
+Il blocco note è l'oggetto usato per trascrivere le mosse dei giocatori in accordo con un particolare formato chiamato [notazione algebrica standard](https://it.wikipedia.org/wiki/Notazione_algebrica).
 
 ## Specifica
 
