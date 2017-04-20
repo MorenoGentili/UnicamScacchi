@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Scacchi.Modello.Pezzi
 {
     public interface IPezzo
@@ -11,7 +13,7 @@ namespace Scacchi.Modello.Pezzi
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
             Traversa traversaArrivo,
-            IScacchiera scacchiera = null);
+            IEnumerable<ICasa> listaCase = null);
         Colore Colore { get; }
     }
 }

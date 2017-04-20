@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Scacchi.Modello.Pezzi
 {
@@ -21,7 +22,7 @@ namespace Scacchi.Modello.Pezzi
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
             Traversa traversaArrivo,
-            IScacchiera scacchiera = null)
+            IEnumerable<ICasa> listaCase = null)
         {
             var differenzaColonne = colonnaPartenza - colonnaArrivo;
             var differenzaTraverse = (int)traversaPartenza - (int)traversaArrivo;

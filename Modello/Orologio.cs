@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Scacchi.Modello
@@ -104,10 +105,15 @@ namespace Scacchi.Modello
         public void Avvia()
         {
             if(!acceso)
-                throw new InvalidOperationException(
-                    "L'Orologio deve essere acceso, per poter essere avviato!");
+                SollevaEccezione();
             partenzaOrologio = DateTime.Now;
             inPausa = false;
+        }
+
+        [DebuggerHidden]
+        private void SollevaEccezione(){
+            throw new InvalidOperationException(
+                    "L'Orologio deve essere acceso, per poter essere avviato!");
         }
 
         public void Pausa()
