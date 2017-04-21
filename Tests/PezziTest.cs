@@ -1325,5 +1325,32 @@ namespace Scacchi.Modello
              //Then
             Assert.False(esito);
         }
+        [Fact]
+        public void LaDonnaBiancaNonPuòSpostarsiInUnaCasaConUnPezzoBianco()
+        {
+        var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Seconda),
+            new Casa(Colonna.G, Traversa.Terza){
+                //metto il pedone bianco simulando l'inizio della partita
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
     }
 }
