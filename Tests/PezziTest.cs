@@ -1464,5 +1464,88 @@ namespace Scacchi.Modello
              //Then
             Assert.True(esito);
         }
+
+         [Fact]
+        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoVerticale()
+        {
+            //Given
+            var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.E,Traversa.Seconda){
+                //metto il pedone bianco simulando l'inizio della partita
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.E, Traversa.Terza)
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaNonPuòSpostarsiInVerticaleInUnaCasaConUnPezzoBianco()
+        {
+        var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.E,Traversa.Seconda),
+            new Casa(Colonna.E, Traversa.Terza){
+                //metto il pedone bianco in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaPuòSposarsiInVerticaleInUnaCasellaConUnPezzoNero()
+        {
+          var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.E,Traversa.Seconda),
+            new Casa(Colonna.E, Traversa.Terza){
+                //metto il pedone nero in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Prima,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.True(esito);
+        }
     }
 }
