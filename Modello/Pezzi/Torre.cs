@@ -29,7 +29,50 @@ namespace Scacchi.Modello.Pezzi {
                 ||
               traversaPartenza == traversaArrivo && colonnaPartenza != colonnaArrivo)
               {   
-                  return true;
+                  //Caso input senza listaCase
+                  if(listaCase == null){
+
+                  
+                      return true;
+                  }
+                  else{ // Caso con lista in input
+                        ICasa casaPartenza = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaPartenza 
+                            && casa.Traversa == traversaPartenza 
+                            && casa.PezzoPresente == this);
+                        
+                        ICasa casaArrivo = listaCase.SingleOrDefault( casa => casa.Colonna==colonnaArrivo 
+                            && casa.Traversa == traversaArrivo);
+                        
+                             // Movimento in verticale
+                        if(colonnaArrivo == colonnaPartenza){
+                            Traversa traversaMaggiore = traversaPartenza > traversaArrivo? 
+                                                            traversaPartenza : traversaArrivo;
+                            Traversa traversaMinore = traversaPartenza < traversaArrivo? 
+                                                            traversaPartenza : traversaArrivo;
+
+                            IEnumerable<ICasa> caseInMezzo = listaCase
+                                                                      .Where(casa => casa.Colonna == colonnaPartenza 
+                                                                            && casa.Traversa <= traversaMaggiore && casa.Traversa >= traversaMinore)
+                                                                      .ConPezzi();
+                            if(caseInMezzo.Count() <= 2){ // Nessun pezzo in mezzo
+                                if(casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore || casaArrivo.PezzoPresente == null){
+                                    return true; // Mangiato o casella vuota!
+                                }
+                                else{ // Stesso colore nella casella di arrivo
+                                    return false; 
+                                }
+
+                            } else { // Pezzi in mezzo
+                                return false;
+                            }
+                            
+
+                        } else { // Movimento in orizzontale
+                            //TODO 
+                            return true;
+                        }
+                        
+                  }
               }
 
             return false;
