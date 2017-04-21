@@ -1283,6 +1283,7 @@ namespace Scacchi.Modello
                     traversaPartenza: Traversa.Settima,
                     colonnaArrivo: Colonna.A,
                     traversaArrivo: Traversa.Quinta);
+        }
         [Fact]
         public void IlPedoneNonPuoMuovereDiDueCaseInAvantiSeCaseNelPercorsoSonoOccupate()
         {
