@@ -1298,7 +1298,7 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoOrizzontale()
+        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoObliquo()
         {
             //Given
             var donna = new Donna(Colore.Bianco);
@@ -1326,7 +1326,7 @@ namespace Scacchi.Modello
             Assert.False(esito);
         }
         [Fact]
-        public void LaDonnaBiancaNonPuòSpostarsiInUnaCasaConUnPezzoBianco()
+        public void LaDonnaBiancaNonPuòSpostarsiInObliquoUnaCasaConUnPezzoBianco()
         {
         var donna = new Donna(Colore.Bianco);
             //When
@@ -1336,7 +1336,7 @@ namespace Scacchi.Modello
             },
             new Casa(Colonna.F,Traversa.Seconda),
             new Casa(Colonna.G, Traversa.Terza){
-                //metto il pedone bianco simulando l'inizio della partita
+                //metto il pedone bianco in un posto obliquo alla posizione della regina
                 PezzoPresente = new Pedone(Colore.Bianco)
             }
         };
@@ -1351,6 +1351,33 @@ namespace Scacchi.Modello
             );
              //Then
             Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaPuòSposarsiInObliquoInUnaCasellaConUnPezzoNero()
+        {
+          var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Seconda),
+            new Casa(Colonna.G, Traversa.Terza){
+                //metto il pedone nero in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.True(esito);
         }
     }
 }
