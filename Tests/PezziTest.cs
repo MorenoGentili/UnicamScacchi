@@ -1291,6 +1291,58 @@ namespace Scacchi.Modello
         Assert.False(esito);
         }
 
+        [Fact]
+        public void LaTorreNonPuòScavalcareNelMovimentoOrizzontale()
+        {
+            //Given
+            var torre =  new Torre(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Nero)
+                },
+                new Casa(Colonna.C, Traversa.Terza)
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+        }
+
+        [Fact]
+        public void LaTorreNonPuòScavalcareNelMovimentoVerticale()
+        {
+            //Given
+            var torre =  new Torre(Colore.Bianco);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta){
+                        PezzoPresente = new Pedone(Colore.Nero)
+                    },
+                    new Casa(Colonna.A, Traversa.Quinta)
+                };
+            //When
+            bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+            //Then
+            Assert.False(esito);
+        }
+
 
     }
 }
