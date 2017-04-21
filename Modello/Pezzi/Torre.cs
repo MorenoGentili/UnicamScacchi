@@ -43,7 +43,7 @@ namespace Scacchi.Modello.Pezzi {
                         ICasa casaArrivo = listaCase.SingleOrDefault( casa => casa.Colonna==colonnaArrivo 
                             && casa.Traversa == traversaArrivo);
                         
-                             // Movimento in verticale
+                        // Movimento in verticale
                         if(colonnaArrivo == colonnaPartenza){
                             Traversa traversaMaggiore = traversaPartenza > traversaArrivo? 
                                                             traversaPartenza : traversaArrivo;
@@ -52,10 +52,10 @@ namespace Scacchi.Modello.Pezzi {
 
                             IEnumerable<ICasa> caseInMezzo = listaCase
                                                                       .Where(casa => casa.Colonna == colonnaPartenza 
-                                                                            && casa.Traversa <= traversaMaggiore && casa.Traversa >= traversaMinore)
+                                                                            && casa.Traversa < traversaMaggiore && casa.Traversa > traversaMinore)
                                                                       .ConPezzi();
-                            if(caseInMezzo.Count() <= 2){ // Nessun pezzo in mezzo
-                                if(casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore || casaArrivo.PezzoPresente == null){
+                            if(caseInMezzo.Count() == 0){ // Nessun pezzo in mezzo
+                                if(casaArrivo.PezzoPresente == null || casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore){
                                     return true; // Mangiato o casella vuota!
                                 }
                                 else{ // Stesso colore nella casella di arrivo
@@ -68,8 +68,28 @@ namespace Scacchi.Modello.Pezzi {
                             
 
                         } else { // Movimento in orizzontale
-                            //TODO 
-                            return true;
+                            Colonna colonnaMaggiore = colonnaPartenza > colonnaArrivo ? colonnaPartenza: colonnaArrivo;
+                            Colonna colonnaMinore = colonnaPartenza < colonnaArrivo ? colonnaPartenza: colonnaArrivo;
+                            
+                            IEnumerable<ICasa> caseInMezzo = listaCase
+                                                                      .Where(casa => casa.Traversa == traversaPartenza 
+                                                                                && casa.Colonna < colonnaMaggiore 
+                                                                                && casa.Colonna > colonnaMinore)
+                                                                      .ConPezzi();
+                            
+                            if(caseInMezzo.Count() == 0){ // Nessun pezzo in mezzo
+                                if(casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore || casaArrivo.PezzoPresente == null){
+                                    return true; // Mangiato o casella vuota!
+                                }
+                                else{ // Stesso colore nella casella di arrivo
+                                    return false; 
+                                }
+
+                            } else { // Pezzi in mezzo
+                                return false;
+                            }
+                                                                            
+                            
                         }
                         
                   }
