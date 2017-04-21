@@ -1,5 +1,4 @@
 ﻿using System;
-using Scacchi.Modello;
 
 namespace Scacchi
 {
@@ -10,11 +9,15 @@ namespace Scacchi
             SimpleXUnitRunner.SimpleXUnit.RunTests();
 
             Console.ReadKey();
-
-
-            //La sottoscrizione all'evento TempoScaduto è stata spostata
-            //in un test in OrologioTest.cs (vedi in fondo al file, riga 180)
+         
         }
+
+
+            /*IScacchiera scacchiera = new Scacchiera();
+            scacchiera
+            .Case
+            .ConPezzi(Colore.Bianco)
+            .DiTipo<Pedone>();*/
 
     }
 }
