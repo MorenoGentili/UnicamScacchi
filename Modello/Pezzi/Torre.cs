@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Scacchi.Extensions;
 
 namespace Scacchi.Modello.Pezzi {
     public class Torre : IPezzo
@@ -21,15 +23,19 @@ namespace Scacchi.Modello.Pezzi {
             Traversa traversaArrivo,
            IEnumerable<ICasa> listaCase = null)
         {
-            var stessaColonna = colonnaPartenza == colonnaArrivo;
-            var stessaTraversa = traversaPartenza == traversaArrivo;
+           
+           
+           if(colonnaArrivo == colonnaPartenza && traversaPartenza != traversaArrivo
+                ||
+              traversaPartenza == traversaArrivo && colonnaPartenza != colonnaArrivo)
+              {   
+                  return true;
+              }
 
-            if((stessaTraversa && !stessaColonna) || (stessaColonna && !stessaTraversa)){
-                return true;
-            }else{
-                return false;
-            }
-            
-        }
+            return false;
+
+
+
+        } 
     }
 }

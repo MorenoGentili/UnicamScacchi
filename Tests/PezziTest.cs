@@ -1343,6 +1343,118 @@ namespace Scacchi.Modello
             Assert.False(esito);
         }
 
+        [Fact]
+        public void LaTorrePuoMuovereInVerticaleSuUnaScacchieraEMangiare()
+        {
+        //Given
+        var torre =  new Torre(Colore.Bianco);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta),
+                    new Casa(Colonna.A, Traversa.Quinta){
+                        PezzoPresente = new Pedone(Colore.Nero)
+                    }
+                };
+        //When
+        bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaTorrePuoMuovereInOrizzontaleSuUnaScacchieraEMangiare()
+        {
+            //Given
+            var torre =  new Torre(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza),
+                new Casa(Colonna.C, Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Nero)
+                }
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.True(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuoMangiareUnPezzoDelloStessoColoreInVerticale(Colore c)
+        {
+        //Given
+        var torre =  new Torre(c);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta),
+                    new Casa(Colonna.A, Traversa.Quinta){
+                        PezzoPresente = new Pedone(c)
+                    }
+                };
+        //When
+        bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+        //Then
+        Assert.False(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuoMangiareUnPezzoDelloStessoColoreInOrizzontale(Colore c)
+        {
+            //Given
+            var torre =  new Torre(c);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza),
+                new Casa(Colonna.C, Traversa.Terza){
+                    PezzoPresente = new Pedone(c)
+                }
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+        }
+
+        
+
+        
+
 
     }
 }
