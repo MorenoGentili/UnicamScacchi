@@ -1291,6 +1291,65 @@ namespace Scacchi.Modello
         Assert.False(esito);
         }
 
+        [Fact]
+        public void IlCavalloPuòScavalcareIPezziNelMovimentoAL()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Bianco);
+         IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.A,Traversa.Seconda){
+                PezzoPresente = cavallo
+            },
+            new Casa(Colonna.B,Traversa.Terza){
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.C, Traversa.Terza)
+        };
+        //When
+         bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.A,
+            traversaPartenza: Traversa.Seconda,
+            colonnaArrivo: Colonna.C,
+            traversaArrivo: Traversa.Terza,
+            listaCase: listaCase
+        );        
+        //Then
+        Assert.True(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void ilCavalloNonPuòMuoversiInCaseConPezziDelloStessoColoreSeDiversoLoCattura(Colore colore)
+        {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A,Traversa.Seconda){
+                    PezzoPresente = cavallo
+                },
+                new Casa(Colonna.B,Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Bianco)
+                },
+                new Casa(Colonna.C, Traversa.Terza) {
+                    PezzoPresente = new Pedone(colore)
+                }
+            };
+            //When
+            bool esito = cavallo.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Seconda,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );        
+            //Then
+            if(colore == cavallo.Colore)
+                Assert.False(esito);
+            else
+                Assert.True(esito);
+        }
+
 
     }
 }
