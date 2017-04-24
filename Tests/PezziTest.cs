@@ -1395,7 +1395,7 @@ namespace Scacchi.Modello
         Assert.False(esito);
         }
 
-                [Fact]
+        [Fact]
         public void LAlfierePuòMuovereIndietroASinistraSeCaseNonNelPercorsoSonoOccupate()
         {
         //Given
@@ -1415,6 +1415,82 @@ namespace Scacchi.Modello
             traversaPartenza: Traversa.Quarta,
             colonnaArrivo: Colonna.A,
             traversaArrivo: Traversa.Prima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LAlfierePuoMuovereInAvantiADestraSeCaseNonNelPercorsoSonoOccupate()
+        {
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.H,Traversa.Ottava){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.G, Traversa.Settima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.G,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.True(esito);
+        }
+
+        [Fact]
+        public void LAlfiereNonPuoMuovereInAvantiASinistraSeLaCasaÈOccupataDaUnPezzoDelloStessoColore()
+        {
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.A,Traversa.Settima){
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+        }
+
+        [Fact]
+        public void LAlfierePuoMuovereInAvantiASinistraSeLaCasaÈOccupataDaUnPezzoDiDiversoColore()
+        {
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.A,Traversa.Settima){
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Settima,
             listaCase: listaCase
         );
         //Then
