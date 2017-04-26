@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Scacchi.Modello.Pezzi
 {
+
     public class Alfiere : IPezzo
     {
         private readonly Colore colore;
@@ -17,6 +18,8 @@ namespace Scacchi.Modello.Pezzi
                 return colore;
             }
         }
+
+
         public bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,

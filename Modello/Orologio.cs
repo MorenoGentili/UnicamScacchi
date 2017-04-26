@@ -138,5 +138,6 @@ namespace Scacchi.Modello
             TempoResiduoBianco = tempoIniziale;
             TempoResiduoNero = tempoIniziale;
         }
+
     }
 }
