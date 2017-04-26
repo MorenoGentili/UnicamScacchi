@@ -4,22 +4,12 @@ using System.Linq;
 
 namespace Scacchi.Modello.Pezzi
 {
-    public class Donna : IPezzo
+    public class Donna : Pezzo
     {
-        private readonly Colore colore;
-        public Donna(Colore colore)
+        public Donna(Colore colore) : base(colore)
         {
-
-            this.colore = colore;
         }
-        public Colore Colore
-        {
-            get
-            {
-                return colore;
-            }
-        }
-        public bool PuòMuovere(
+        public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
@@ -87,7 +77,7 @@ namespace Scacchi.Modello.Pezzi
                         //allora il pezzo sta in mezzo tra me e la destinazione 
                         return false;
                     }
-                    else if (casaArrivo.PezzoPresente.Colore == this.colore)
+                    else if (casaArrivo.PezzoPresente.Colore == this.Colore)
                     {
                         //questa voce causa fallimenti nei test precedenti quelli che non consideravano 
                         //le pedine nella scacchiera per farlo passare devo cancellare per forza i test

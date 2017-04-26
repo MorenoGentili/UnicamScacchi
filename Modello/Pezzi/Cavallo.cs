@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Cavallo : IPezzo
+    public class Cavallo : Pezzo
     {
-        private readonly Colore colore;
-        public Cavallo(Colore colore)
-        {
-            this.colore = colore;    
+        public Cavallo(Colore colore) : base(colore)
+        {    
         }
-        public Colore Colore {
-            get {
-                return colore;
-            }
-        }
-        public bool PuòMuovere(
+        public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,

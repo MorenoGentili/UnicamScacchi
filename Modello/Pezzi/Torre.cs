@@ -4,19 +4,12 @@ using System.Linq;
 using Scacchi.Extensions;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Torre : IPezzo
+    public class Torre : Pezzo
     {
-        private readonly Colore colore;
-        public Torre(Colore colore)
-        {
-            this.colore = colore;    
+        public Torre(Colore colore) : base(colore)
+        {    
         }
-        public Colore Colore {
-            get {
-                return colore;
-            }
-        }
-        public bool PuòMuovere(
+        public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,

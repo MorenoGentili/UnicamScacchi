@@ -12,6 +12,7 @@ namespace Scacchi
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
+            Console.SetWindowSize(100, 30);
             SimpleXUnitRunner.SimpleXUnit.RunTests();
             Console.ReadKey();
 
