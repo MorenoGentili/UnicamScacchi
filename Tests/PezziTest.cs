@@ -1666,6 +1666,7 @@ namespace Scacchi.Modello
             traversaArrivo: Traversa.Settima,
             listaCase: listaCase
         );
+        }
           
         public void IlCavalloPuòScavalcareIPezziNelMovimentoAL()
         {
