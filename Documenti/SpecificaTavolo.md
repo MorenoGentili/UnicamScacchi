@@ -3,11 +3,12 @@ Il tavolo è l'oggetto che regge tutti gli altri componenti del gioco ed è il p
 
 ## Specifica
 
-1. Il tavolo deve accettare come input la mossa del giocatore corrente. Il formato atteso è il seguente: B2 B3, dove B2 è la casa di partenza e B3 quella di arrivo.
-2. La casa di partenza deve contenere un pezzo del colore del giocatore corrente.
-3. Nonappena è stata indicata la mossa, il tavolo deve invocare il metodo PuòMuovere del pezzo nella casa di partenza per verificare se la mossa è consentita;
-4. Se la mossa non è consentita, deve essere visualizzato un errore;
-5. Se la mossa è consentita, il pezzo verrà spostato dalla casa di partenza a quella di arrivo, eventualmente catturando un pezzo avversario;
-6. Dopo ogni mossa (consentita o no) deve essere visualizzata la scacchiera e il suo stato attuale. 
+1. Prima che la partita inizi, il tavolo deve chiedere il nome del giocatore bianco e del giocatore nero;
+2. Il tavolo deve accettare come input la mossa del giocatore corrente; Il formato atteso è il seguente: B2 B3, dove B2 è la casa di partenza e B3 quella di arrivo.
+3. La mossa può essere accettata solo se il giocatore corrente ha abbastanza tempo residuo. Se il tempo è scaduto, proclamare la vittoria dell'altro giocatore;
+4. La mossa può essere accettata solo se la casa di partenza contiene un pezzo del colore del giocatore corrente, altrimenti deve essere stampato l'errore "Mossa non valida" e accettare un nuovo input dal giocatore;
+5. La mossa può essere accettata solo se il pezzo della casa di partenza può effettivamente muovere alla destinazione indicata. In caso di errore, stampare "Mossa non valida", altrimenti spostare il pezzo nella sua destinazione;
+6. Se nella scacchiera manca un Re, va proclamata la vittoria del giocatore che possiede ancora il Re;
+7. Dopo ogni mossa (consentita o no) deve essere visualizzata la scacchiera e il suo stato attuale. Deve essere chiesto all'altro giocatore di inserire la sua mossa (si torna al punto 1).
 
 ![Blocco note](../Immagini/tavolo.jpg)
