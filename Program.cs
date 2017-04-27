@@ -15,7 +15,6 @@ namespace Scacchi
             Console.SetWindowSize(100, 30);
             SimpleXUnitRunner.SimpleXUnit.RunTests();
             Console.ReadKey();
-
         }
 
         /*var pedone1 = new Pedone(Colore.Bianco);

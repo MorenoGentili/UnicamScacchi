@@ -120,7 +120,11 @@ namespace Scacchi.Modello
         {
             inPausa = true;
         }
-
+        public bool InPausa {
+            get {
+                return inPausa;
+            }
+        }
         public void FineTurno() {
             if(TurnoAttuale == Colore.Bianco) {
                 tempoResiduoBianco = tempoIniziale;
