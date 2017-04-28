@@ -53,7 +53,6 @@ namespace Scacchi.Tests
         Tavolo tavolo = new Tavolo(null, null);
         //When
         Coordinata coordinata = tavolo.InterpretaCoordinataCasa("A4");
-
         
         //Then
         Assert.Equal(Traversa.Quarta, coordinata.Traversa);
