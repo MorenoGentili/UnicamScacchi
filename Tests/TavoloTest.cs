@@ -58,5 +58,7 @@ namespace Scacchi.Tests
         Assert.Equal(Traversa.Quarta, coordinata.Traversa);
         Assert.Equal(Colonna.A, coordinata.Colonna);
         }
+
+        
     }
 }

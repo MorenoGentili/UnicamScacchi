@@ -66,9 +66,11 @@ namespace Scacchi.Modello
 
         internal Coordinata InterpretaCoordinataCasa(string casa)
         {
-            Enum.TryParse<Colonna>(casa.Substring(0, 1), out Colonna colonna);
-            int.TryParse(casa.Substring(1, 1), out int traversaInt);
-            Traversa traversa = (Traversa)traversaInt;
+            bool risultatoParseColonna = Enum.TryParse<Colonna>(casa.Substring(0, 1), out Colonna colonna);
+            bool risultatoParseTraversa = Enum.TryParse<Traversa>(casa.Substring(1, 1), out Traversa traversa);
+            if(!risultatoParseColonna || !risultatoParseTraversa) {
+                throw new InvalidOperationException("Input errato");
+            }
             return new Coordinata(traversa, colonna);
         }
 
