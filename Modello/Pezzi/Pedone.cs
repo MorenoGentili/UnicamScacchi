@@ -86,6 +86,8 @@ namespace Scacchi.Modello.Pezzi
             //Avanzamento del pedone di due caselle
             else if(primaMossa && stessaColonna && Math.Abs(distanzaTraLeTraverse) == 2) {
                 try {
+                    //Vedo se trovo un pezzo all'interno della casa tra quella di 
+                    //partenza e quella di arrivo. Se la trovo il pedone non si muove
                     listaCase.Single((casa) =>
                      (this.Colore == Colore.Bianco &&
                      casa.Traversa < traversaArrivo
