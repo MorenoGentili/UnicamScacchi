@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scacchi.Modello;
 using Scacchi.Modello.Pezzi;
 
@@ -59,8 +60,8 @@ namespace Scacchi.Modello
             {
                 throw new InvalidOperationException("Mossa non valida");
             }
-            casaArrivo.PezzoPresente = casaPartenza.PezzoPresente;
-            casaPartenza.PezzoPresente = null;
+
+            Scacchiera.spostaPezzo(casaPartenza, casaArrivo);
             //Controllo che il re non sia stato mangiato
             Colore coloreControlloSconfitta;
             if(Orologio.TurnoAttuale == Colore.Bianco) {

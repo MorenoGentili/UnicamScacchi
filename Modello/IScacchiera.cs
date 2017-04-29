@@ -8,6 +8,7 @@ namespace Scacchi.Modello
         IEnumerable<ICasa> Case { get; }
         ICasa this[Colonna colonna, Traversa traversa] { get; }
         bool ReInVita(Colore colore);
+        void spostaPezzo(ICasa casaPartenza, ICasa casaArrivo);
 
     }
 }

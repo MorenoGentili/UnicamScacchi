@@ -92,6 +92,33 @@ namespace Scacchi.Tests
         Assert.True(vittoriaRichiamata);
         }
 
+        [TheoryAttribute]
+        [InlineDataAttribute("A2 A5")]
+        [InlineDataAttribute("B1 B4")]
+        [InlineDataAttribute("D1 D3")]
+        [InlineDataAttribute("E1 E5")]
+        [InlineDataAttribute("F1 F3")]
+        [InlineDataAttribute("D1 D2")]
+        public void MossaInvalidaLanciaEccezione(string mossaInvalida)
+        {
+        //Given
+        Scacchiera scacchiera = new Scacchiera();
+        Orologio orologio = new Orologio();
+        Tavolo tavolo = new Tavolo(scacchiera, orologio);
+        //When
+        tavolo.RiceviGiocatori("Robespierre", "Rob Van Dam");
+        tavolo.AvviaPartita();
+        //Simulazione di alcune mosse valide di pedoni
+        tavolo.InserisciMossa("A2 A4");
+        tavolo.InserisciMossa("A7 A5");
+        tavolo.InserisciMossa("B2 B4");
+        tavolo.InserisciMossa("A5 B4");
+        //Cosa succede per le mosse invalide
+       // Assert.Throws(typeof(InvalidOperationException), () => {
+       //     tavolo.InserisciMossa(mossaInvalida);
+       // });
+        }
+
 
     }
 }

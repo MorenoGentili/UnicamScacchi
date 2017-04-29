@@ -1220,17 +1220,31 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void IlPedoneBiancoPuoMuovereDiagonalmenteSeCatturaUnPezzo()
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlPedonePuoMuovereDiagonalmenteSeCatturaUnPezzo(Colore colore)
         {
             //Given
-            var pedone = new Pedone(Colore.Bianco);
+            var pedone = new Pedone(colore);
+            Pedone pedoneNemico;
+            Traversa traversaInizio;
+            Traversa traversaArrivo;
+            if(colore == Colore.Bianco) {
+                traversaInizio = Traversa.Prima;
+                traversaArrivo = Traversa.Seconda;
+                pedoneNemico = new Pedone(Colore.Nero);
+            } else {
+                traversaInizio = Traversa.Settima;
+                traversaArrivo = Traversa.Sesta;
+                pedoneNemico = new Pedone(Colore.Bianco);
+            }
             IEnumerable<ICasa> listaCase = new List<Casa>{
-            new Casa(Colonna.A,Traversa.Prima){
+            new Casa(Colonna.A,traversaInizio){
                 PezzoPresente = pedone
             },
-            new Casa(Colonna.B,Traversa.Seconda){
-                PezzoPresente = new Pedone(Colore.Nero)
+            new Casa(Colonna.B,traversaArrivo){
+                PezzoPresente = pedoneNemico
             }
         };
 
@@ -1238,13 +1252,14 @@ namespace Scacchi.Modello
 
             bool esito = pedone.PuòMuovere(
                 colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Prima,
+                traversaPartenza: traversaInizio,
                 colonnaArrivo: Colonna.B,
-                traversaArrivo: Traversa.Seconda,
+                traversaArrivo: traversaArrivo,
                 listaCase: listaCase
             );
             //Then
             Assert.True(esito);
+
         }
         [Fact]
         public void IlPedoneNonPuoMuovereSeHaQualcunoDavanti()
@@ -1269,6 +1284,34 @@ namespace Scacchi.Modello
             );
             //Then
             Assert.False(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlPedonePuòMuovereAvantiDiDueCase(Colore colore)
+        {
+        //Given
+        var pedone = new Pedone(colore);
+        //When
+        Traversa traversaInizio;
+        Traversa traversaFine;
+        if(colore == Colore.Nero) {
+            traversaInizio = Traversa.Settima;
+            traversaFine = Traversa.Quinta;
+        } else {
+            traversaInizio = Traversa.Seconda;
+            traversaFine = Traversa.Quarta;
+        }
+        bool result = pedone.PuòMuovere(
+            Colonna.A,
+            traversaInizio,
+            Colonna.A,
+            traversaFine
+        );
+        //Then
+        Assert.True(result);
+
         }
 
         [Fact]
