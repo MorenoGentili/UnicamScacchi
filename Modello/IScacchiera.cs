@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Scacchi.Modello
@@ -6,7 +7,8 @@ namespace Scacchi.Modello
     {
         IEnumerable<ICasa> Case { get; }
         ICasa this[Colonna colonna, Traversa traversa] { get; }
-        bool MortoIlRe(Colore colore);
+        event EventHandler<Colore> Vittoria;
+        void ReInVita(Colore colore);
 
     }
 }

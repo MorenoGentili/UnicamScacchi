@@ -26,9 +26,11 @@ namespace Scacchi.Modello
 
             Orologio.Accendi();
             Orologio.Avvia();
+            Orologio.TempoScaduto += FinisciPartita;
+            Scacchiera.Vittoria += FinisciPartita;
         }
 
-        public void FinisciPartita() {
+        public void FinisciPartita(object sender, Colore colore) {
             Orologio.Reset();
             Scacchiera = new Scacchiera();
             Giocatori = null;
@@ -53,8 +55,11 @@ namespace Scacchi.Modello
             }
             casaArrivo.PezzoPresente = casaPartenza.PezzoPresente;
             casaPartenza.PezzoPresente = null;
-            if(Scacchiera.MortoIlRe(Colore.Bianco)) {
-
+            //Controllo che il re non sia stato mangiato
+            if(Orologio.TurnoAttuale == Colore.Bianco) {
+                Scacchiera.ReInVita(Colore.Nero);
+            } else {
+                Scacchiera.ReInVita(Colore.Bianco);
             }
             Orologio.FineTurno();
         }

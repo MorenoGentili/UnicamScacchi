@@ -96,13 +96,19 @@ namespace Scacchi.Modello
             }
         }
 
-        public bool MortoIlRe(Colore colore) {
+        public event EventHandler<Colore> Vittoria;
+
+        public void ReInVita(Colore colore) {
             try {
                 Case.Single(casa => casa.PezzoPresente is Re && casa.PezzoPresente.Colore == colore);
-                return true;
             } catch(InvalidOperationException ex) {
-                return false;
+                if(colore == Colore.Bianco) {
+                    Vittoria.Invoke(this, Colore.Nero);
+                } else if(colore == Colore.Nero) {
+                    Vittoria.Invoke(this, Colore.Bianco);
+                }
             }
+
         }
 
     }
