@@ -96,5 +96,14 @@ namespace Scacchi.Modello
             }
         }
 
+        public bool MortoIlRe(Colore colore) {
+            try {
+                Case.Single(casa => casa.PezzoPresente is Re && casa.PezzoPresente.Colore == colore);
+                return true;
+            } catch(InvalidOperationException ex) {
+                return false;
+            }
+        }
+
     }
 }
