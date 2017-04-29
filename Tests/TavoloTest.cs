@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Scacchi.Modello;
 using Xunit;
 
@@ -53,12 +55,43 @@ namespace Scacchi.Tests
         Tavolo tavolo = new Tavolo(null, null);
         //When
         Coordinata coordinata = tavolo.InterpretaCoordinataCasa("A4");
-        
         //Then
         Assert.Equal(Traversa.Quarta, coordinata.Traversa);
         Assert.Equal(Colonna.A, coordinata.Colonna);
         }
 
-        
+
+
+        [Fact]
+        public void IlTavoloDeveLanciareUnEccezioneSeLeCoordinateSonoSbagliate()
+        {
+        //Given
+        Tavolo tavolo = new Tavolo(null, null);
+        //When
+        //Then
+        Assert.Throws(typeof(InvalidOperationException), 
+            () => {tavolo.InterpretaCoordinataCasa("Che fare");});
+        }
+
+        private bool vittoriaRichiamata = false;
+        [Fact]
+        public void IlTavoloProclamaVittoriaPerAltroSeScadeIlTempoMossa()
+        {
+        //Given
+        Tavolo tavolo = new Tavolo(new Scacchiera(), new Orologio(TimeSpan.FromMilliseconds(1000)));
+        //When
+        tavolo.RiceviGiocatori("Bruno Liegi Bastonliegi", "Ennio Annio");
+        tavolo.AvviaPartita();
+        //Then
+        //Il colore della Vittoria sarà Nero, perchè inizia sempre il bianco a giocare
+        tavolo.Vittoria += (object sender, Colore colore) => {
+            Assert.Equal(colore, Colore.Nero);
+            vittoriaRichiamata = true;
+        };
+        Thread.Sleep(TimeSpan.FromMilliseconds(2000));
+        Assert.True(vittoriaRichiamata);
+        }
+
+
     }
 }

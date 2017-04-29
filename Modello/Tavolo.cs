@@ -19,6 +19,8 @@ namespace Scacchi.Modello
         public IScacchiera Scacchiera { get; private set; }
         public IOrologio Orologio { get; private set; }
 
+        public event EventHandler<Colore> Vittoria;
+
         public void AvviaPartita()
         {
             if (Giocatori == null)
@@ -26,11 +28,15 @@ namespace Scacchi.Modello
 
             Orologio.Accendi();
             Orologio.Avvia();
-            Orologio.TempoScaduto += FinisciPartita;
-            Scacchiera.Vittoria += FinisciPartita;
+            Orologio.TempoScaduto += (Orologio, colore) => {
+                if(colore == Colore.Bianco)
+                    Vittoria.Invoke(Orologio, Colore.Nero);
+                else
+                    Vittoria.Invoke(Orologio, Colore.Bianco);
+            };
         }
 
-        public void FinisciPartita(object sender, Colore colore) {
+        public void FinisciPartita() {
             Orologio.Reset();
             Scacchiera = new Scacchiera();
             Giocatori = null;
@@ -56,10 +62,15 @@ namespace Scacchi.Modello
             casaArrivo.PezzoPresente = casaPartenza.PezzoPresente;
             casaPartenza.PezzoPresente = null;
             //Controllo che il re non sia stato mangiato
+            Colore coloreControlloSconfitta;
             if(Orologio.TurnoAttuale == Colore.Bianco) {
-                Scacchiera.ReInVita(Colore.Nero);
+                coloreControlloSconfitta = Colore.Nero;
             } else {
-                Scacchiera.ReInVita(Colore.Bianco);
+                coloreControlloSconfitta = Colore.Bianco;
+            }
+            bool reInVita = Scacchiera.ReInVita(coloreControlloSconfitta);
+            if(!reInVita) {
+                Vittoria.Invoke(Scacchiera, Orologio.TurnoAttuale);
             }
             Orologio.FineTurno();
         }

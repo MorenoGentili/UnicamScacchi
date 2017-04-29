@@ -7,8 +7,7 @@ namespace Scacchi.Modello
     {
         IEnumerable<ICasa> Case { get; }
         ICasa this[Colonna colonna, Traversa traversa] { get; }
-        event EventHandler<Colore> Vittoria;
-        void ReInVita(Colore colore);
+        bool ReInVita(Colore colore);
 
     }
 }
