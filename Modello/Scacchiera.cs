@@ -94,6 +94,26 @@ namespace Scacchi.Modello
             {
                 return listaCase[(int)colonna - 1 + (((int)traversa - 1) * 8)];
             }
+            set {
+                listaCase[(int)colonna - 1 + (((int)traversa - 1) * 8)] = value;
+            }
+        }
+
+
+        public bool ReInVita(Colore colore) {
+            try {
+                Case.Single(casa => casa.PezzoPresente is Re && casa.PezzoPresente.Colore == colore);
+                return true;
+            } catch(InvalidOperationException ex) {
+                return false;
+            }
+
+        }
+
+        public void spostaPezzo(ICasa casaPartenza, ICasa casaArrivo) {
+            IPezzo pezzoPresente = casaPartenza.PezzoPresente;
+            listaCase[(int)casaPartenza.Colonna - 1 + (((int)casaPartenza.Traversa - 1) * 8)].PezzoPresente = null;
+            listaCase[(int)casaArrivo.Colonna - 1 + (((int)casaArrivo.Traversa - 1) * 8)].PezzoPresente = pezzoPresente;       
         }
 
     }
