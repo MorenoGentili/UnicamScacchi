@@ -114,10 +114,42 @@ namespace Scacchi.Tests
         tavolo.InserisciMossa("B2 B4");
         tavolo.InserisciMossa("A5 B4");
         //Cosa succede per le mosse invalide
-       // Assert.Throws(typeof(InvalidOperationException), () => {
-       //     tavolo.InserisciMossa(mossaInvalida);
-       // });
+        Assert.Throws(typeof(InvalidOperationException), () => {
+                tavolo.InserisciMossa(mossaInvalida);
+        });
         }
+
+        [TheoryAttribute]
+        [InlineDataAttribute("A2","A4")]
+        [InlineDataAttribute("B1","C3")]
+        public void pezzoSiSpostaSeMossaValida(string coord1, string coord2) {
+            //Given
+            Scacchiera scacchiera = new Scacchiera();
+            Orologio orologio = new Orologio();
+            Tavolo tavolo = new Tavolo(scacchiera, orologio);
+            //When
+            tavolo.RiceviGiocatori("Fhurer", "Mahatma");
+            tavolo.AvviaPartita();
+            var coordPartenza = tavolo.InterpretaCoordinataCasa(coord1);
+            var coordFine = tavolo.InterpretaCoordinataCasa(coord2);
+            var pezzoInQuestione = tavolo.Scacchiera[coordPartenza.Colonna, coordPartenza.Traversa].PezzoPresente; 
+            tavolo.InserisciMossa(coord1 + " " + coord2);
+            Assert.Equal(tavolo.Scacchiera[coordPartenza.Colonna, coordPartenza.Traversa].PezzoPresente, null);
+            Assert.Equal(tavolo.Scacchiera[coordFine.Colonna, coordFine.Traversa].PezzoPresente, pezzoInQuestione);
+
+        }
+
+        [Fact]
+        public void partitaFinisceSeSiMangiaIlRe()
+        {
+        //Given
+        //Bisognerebbe simulare un intera partita di scacchi? Come fare una cosa del genere?
+        //When
+        
+        //Then
+        }
+
+
 
 
     }
