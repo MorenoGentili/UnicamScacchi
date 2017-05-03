@@ -9,6 +9,11 @@ namespace Scacchi.Modello.Pezzi {
         {
             this.colore = colore;    
         }
+        public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ?  '♚' : '♔';
+            }
+        }
         public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,

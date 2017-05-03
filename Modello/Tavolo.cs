@@ -10,13 +10,15 @@ namespace Scacchi.Modello
     {
 
 
-        public Tavolo(IScacchiera scacchiera, IOrologio orologio)
+        public Tavolo(IScacchiera scacchiera, IOrologio orologio, IBloccoNote bloccoNote)
         {
             Scacchiera = scacchiera;
             Orologio = orologio;
+            BloccoNote = bloccoNote;
         }
-        public Dictionary<Colore, IGiocatore> Giocatori { get; private set; }
+        public IReadOnlyDictionary<Colore, IGiocatore> Giocatori { get { return giocatori; } }
 
+        public IBloccoNote BloccoNote{ get; private set;}
         public IScacchiera Scacchiera { get; private set; }
         public IOrologio Orologio { get; private set; }
 
@@ -40,7 +42,7 @@ namespace Scacchi.Modello
         public void FinisciPartita() {
             Orologio.Reset();
             Scacchiera = new Scacchiera();
-            Giocatori = null;
+            giocatori = null;
         }
 
         public void InserisciMossa(string mossa)
@@ -61,7 +63,8 @@ namespace Scacchi.Modello
                 throw new InvalidOperationException("Mossa non valida");
             }
 
-            Scacchiera.spostaPezzo(casaPartenza, casaArrivo);
+            Scacchiera.SpostaPezzo(casaPartenza, casaArrivo);
+            BloccoNote.ScriviMossa(mossa);
             //Controllo che il re non sia stato mangiato
             Colore coloreControlloSconfitta;
             if(Orologio.TurnoAttuale == Colore.Bianco) {
@@ -87,11 +90,12 @@ namespace Scacchi.Modello
         }
 
 
+        private Dictionary<Colore, IGiocatore> giocatori;
         public void RiceviGiocatori(string nomeBianco, string nomeNero)
         {
-            Giocatori = new Dictionary<Colore, IGiocatore>();
-            Giocatori.Add(Colore.Bianco, new Giocatore(nomeBianco));
-            Giocatori.Add(Colore.Nero, new Giocatore(nomeNero));
+            giocatori = new Dictionary<Colore, IGiocatore>();
+            giocatori.Add(Colore.Bianco, new Giocatore(nomeBianco));
+            giocatori.Add(Colore.Nero, new Giocatore(nomeNero));
         }
     }
 }

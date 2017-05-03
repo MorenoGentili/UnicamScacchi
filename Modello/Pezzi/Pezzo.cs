@@ -9,6 +9,8 @@ namespace Scacchi.Modello.Pezzi
         {
             Colore = colore;
         }
+
+        public abstract char Carattere {get;}
         private Colore colore;
         public Colore Colore
         {
@@ -22,6 +24,9 @@ namespace Scacchi.Modello.Pezzi
             }
         }
 
+        public override string ToString() {
+            return $"{Carattere} {GetType().Name} {Colore}";
+        }
         public virtual bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo, IEnumerable<ICasa> listaCase = null)
         {
             if (colonnaPartenza == colonnaArrivo && traversaPartenza == traversaArrivo)

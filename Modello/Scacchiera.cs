@@ -110,10 +110,9 @@ namespace Scacchi.Modello
 
         }
 
-        public void spostaPezzo(ICasa casaPartenza, ICasa casaArrivo) {
-            IPezzo pezzoPresente = casaPartenza.PezzoPresente;
-            listaCase[(int)casaPartenza.Colonna - 1 + (((int)casaPartenza.Traversa - 1) * 8)].PezzoPresente = null;
-            listaCase[(int)casaArrivo.Colonna - 1 + (((int)casaArrivo.Traversa - 1) * 8)].PezzoPresente = pezzoPresente;       
+        public void SpostaPezzo(ICasa casaPartenza, ICasa casaArrivo) {
+            casaArrivo.PezzoPresente = casaPartenza.PezzoPresente;
+            casaPartenza.PezzoPresente = null;
         }
 
     }

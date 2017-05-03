@@ -12,22 +12,19 @@ namespace Scacchi.Tests
         [Fact]
         public void TestIlTavoloHaDueGiocatori()
         {
-            ITavolo tavolo = new Tavolo(null, null);
+            ITavolo tavolo = new Tavolo(null, null, null);
 
             tavolo.RiceviGiocatori("Bianco", "Nero");
 
-            Dictionary<Colore, IGiocatore> dict = tavolo.Giocatori;
+            IReadOnlyDictionary<Colore, IGiocatore> dict = tavolo.Giocatori;
             IGiocatore bianco = dict[Colore.Bianco];
             IGiocatore nero = dict[Colore.Nero];
 
             Assert.Equal(2, dict.Count);
-
             Assert.Equal(1, dict.Where(colore => colore.Key == Colore.Bianco).Count());
             Assert.Equal(1, dict.Where(colore => colore.Key == Colore.Nero).Count());
-
             Assert.Equal("Bianco", bianco.Nome);
             Assert.Equal("Nero", nero.Nome);
-
         }
 
         [Fact]
@@ -36,7 +33,8 @@ namespace Scacchi.Tests
             //Given
             IScacchiera scacchiera = new Scacchiera();
             IOrologio orologio = new Orologio();
-            ITavolo tavolo = new Tavolo(scacchiera, orologio);
+            BloccoNote bloccoNote = new BloccoNote();
+            ITavolo tavolo = new Tavolo(scacchiera, orologio, bloccoNote);
 
             //When
             tavolo.RiceviGiocatori("", "");
@@ -52,7 +50,7 @@ namespace Scacchi.Tests
         public void IlTavoloDeveEssereInGradoDiInterpretareLeCoordinateDigitateDallUtente()
         {
         //Given
-        Tavolo tavolo = new Tavolo(null, null);
+        Tavolo tavolo = new Tavolo(null, null, null);
         //When
         Coordinata coordinata = tavolo.InterpretaCoordinataCasa("A4");
         //Then
@@ -66,7 +64,7 @@ namespace Scacchi.Tests
         public void IlTavoloDeveLanciareUnEccezioneSeLeCoordinateSonoSbagliate()
         {
         //Given
-        Tavolo tavolo = new Tavolo(null, null);
+        Tavolo tavolo = new Tavolo(null, null, null);
         //When
         //Then
         Assert.Throws(typeof(InvalidOperationException), 
@@ -78,7 +76,7 @@ namespace Scacchi.Tests
         public void IlTavoloProclamaVittoriaPerAltroSeScadeIlTempoMossa()
         {
         //Given
-        Tavolo tavolo = new Tavolo(new Scacchiera(), new Orologio(TimeSpan.FromMilliseconds(1000)));
+        Tavolo tavolo = new Tavolo(new Scacchiera(), new Orologio(TimeSpan.FromMilliseconds(1000)), new BloccoNote());
         //When
         tavolo.RiceviGiocatori("Bruno Liegi Bastonliegi", "Ennio Annio");
         tavolo.AvviaPartita();
@@ -104,7 +102,8 @@ namespace Scacchi.Tests
         //Given
         Scacchiera scacchiera = new Scacchiera();
         Orologio orologio = new Orologio();
-        Tavolo tavolo = new Tavolo(scacchiera, orologio);
+        BloccoNote bloccoNote = new BloccoNote();
+        Tavolo tavolo = new Tavolo(scacchiera, orologio, bloccoNote);
         //When
         tavolo.RiceviGiocatori("Robespierre", "Rob Van Dam");
         tavolo.AvviaPartita();
@@ -126,7 +125,8 @@ namespace Scacchi.Tests
             //Given
             Scacchiera scacchiera = new Scacchiera();
             Orologio orologio = new Orologio();
-            Tavolo tavolo = new Tavolo(scacchiera, orologio);
+            BloccoNote bloccoNote = new BloccoNote();
+            Tavolo tavolo = new Tavolo(scacchiera, orologio, bloccoNote);
             //When
             tavolo.RiceviGiocatori("Fhurer", "Mahatma");
             tavolo.AvviaPartita();

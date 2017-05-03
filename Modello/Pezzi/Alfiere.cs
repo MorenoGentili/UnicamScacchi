@@ -11,7 +11,12 @@ namespace Scacchi.Modello.Pezzi
         {
         }
 
-        public override bool PuòMuovere(
+         public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ? '♝' : '♗';
+            }
+        }
+         public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
@@ -45,7 +50,7 @@ namespace Scacchi.Modello.Pezzi
                             }
                             else
                             {
-                                if (casaArrivo.PezzoPresente?.Colore != this.Colore)
+                                if (casaArrivo?.PezzoPresente?.Colore != this.Colore)
                                     return true;
                                 else
                                     return false;
@@ -61,7 +66,7 @@ namespace Scacchi.Modello.Pezzi
                             }
                             else
                             {
-                                if (casaArrivo.PezzoPresente?.Colore != this.Colore)
+                                if (casaArrivo?.PezzoPresente?.Colore != this.Colore)
                                     return true;
                                 else
                                     return false;
@@ -98,7 +103,7 @@ namespace Scacchi.Modello.Pezzi
                             }
                             else
                             {
-                                if (casaArrivo.PezzoPresente?.Colore != this.Colore)
+                                if (casaArrivo?.PezzoPresente?.Colore != this.Colore)
                                     return true;
                                 else
                                     return false;

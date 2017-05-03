@@ -6,6 +6,11 @@ using Scacchi.Extensions;
 namespace Scacchi.Modello.Pezzi {
     public class Torre : Pezzo
     {
+        public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ? '♜' : '♖';
+            }
+        }
         public Torre(Colore colore) : base(colore)
         {    
         }
@@ -17,6 +22,9 @@ namespace Scacchi.Modello.Pezzi {
            IEnumerable<ICasa> listaCase = null)
         {
            
+            listaCase = listaCase??Enumerable.Empty<ICasa>();
+            if (!base.PuòMuovere(colonnaPartenza, traversaPartenza, colonnaArrivo, traversaArrivo, listaCase))
+                return false;
            
            if(colonnaArrivo == colonnaPartenza && traversaPartenza != traversaArrivo
                 ||
@@ -48,7 +56,7 @@ namespace Scacchi.Modello.Pezzi {
                                                                             && casa.Traversa < traversaMaggiore && casa.Traversa > traversaMinore)
                                                                       .ConPezzi();
                             if(caseInMezzo.Count() == 0){ // Nessun pezzo in mezzo
-                                if(casaArrivo.PezzoPresente == null || casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore){
+                                if(casaArrivo?.PezzoPresente == null || casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore){
                                     return true; // Mangiato o casella vuota!
                                 }
                                 else{ // Stesso colore nella casella di arrivo
@@ -71,7 +79,7 @@ namespace Scacchi.Modello.Pezzi {
                                                                       .ConPezzi();
                             
                             if(caseInMezzo.Count() == 0){ // Nessun pezzo in mezzo
-                                if(casaPartenza.PezzoPresente.Colore != casaArrivo.PezzoPresente.Colore || casaArrivo.PezzoPresente == null){
+                                if(casaPartenza?.PezzoPresente?.Colore != casaArrivo?.PezzoPresente?.Colore || casaArrivo?.PezzoPresente == null){
                                     return true; // Mangiato o casella vuota!
                                 }
                                 else{ // Stesso colore nella casella di arrivo

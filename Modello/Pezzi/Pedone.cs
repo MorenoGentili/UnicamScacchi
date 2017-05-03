@@ -14,9 +14,10 @@ namespace Scacchi.Modello.Pezzi
                 traversaInizio = Traversa.Settima;
         }
 
-        public override string ToString()
-        {
-            return $"Pedone {Colore}";
+        public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ? '♟' : '♙';
+            }
         }
 
         public override int GetHashCode()
@@ -58,7 +59,7 @@ namespace Scacchi.Modello.Pezzi
             {
                 ICasa casaArrivo = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo
                && casa.Traversa == traversaArrivo);
-                if (casaArrivo.PezzoPresente.Colore != this.Colore)
+                if (casaArrivo?.PezzoPresente?.Colore != this.Colore)
                     return true;
             }
 

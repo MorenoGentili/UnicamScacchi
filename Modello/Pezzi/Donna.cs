@@ -9,6 +9,12 @@ namespace Scacchi.Modello.Pezzi
         public Donna(Colore colore) : base(colore)
         {
         }
+
+        public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ? '♛' : '♕';
+            }
+        }
         public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
@@ -53,14 +59,13 @@ namespace Scacchi.Modello.Pezzi
                 {
                     //  MI STO MUOVENDO IN ORIZZONTALE
                     //controllo che davanti a me non ci siano pezzi di alcun genere
-                    pezziTrovati = (listaCase.Where(casa => casa.Colonna != casaPartenza.Colonna
-                         && casa.PezzoPresente != null)).Count();
+                    pezziTrovati = (listaCase.Where(casa => casa.Traversa == traversaPartenza && (int) casa.Colonna >= Math.Min((int) colonnaPartenza, (int) colonnaArrivo) && (int) casa.Colonna <= Math.Max((int) colonnaPartenza, (int) colonnaArrivo) && casa.PezzoPresente != null && casa.PezzoPresente != this)).Count();
                 }
                 else if (stessaColonna && !stessaTraversa)
                 {
                     //  MI STO MUOVENDO IN VERTICALE
                     //controllo che davanti a me non ci siano pezzi di alcun genere
-                    pezziTrovati = (listaCase.Where(casa => casa.Traversa != casaPartenza.Traversa && casa.PezzoPresente != null)).Count();
+                    pezziTrovati = (listaCase.Where(casa => casa.Colonna == colonnaPartenza && (int) casa.Traversa >= Math.Min((int) traversaPartenza, (int) traversaArrivo) && (int) casa.Traversa <= Math.Max((int) traversaPartenza, (int) traversaArrivo) && casa.PezzoPresente != null && casa.PezzoPresente != this)).Count();
                 }
 
                 // ora posso analizzare i  pezzi trovati
@@ -72,12 +77,12 @@ namespace Scacchi.Modello.Pezzi
                 else if (pezziTrovati == 1)
                 {
                     //devo controllare la posizione di questo pezzo
-                    if (casaArrivo.PezzoPresente == null)
+                    if (casaArrivo?.PezzoPresente == null)
                     {
                         //allora il pezzo sta in mezzo tra me e la destinazione 
                         return false;
                     }
-                    else if (casaArrivo.PezzoPresente.Colore == this.Colore)
+                    else if (casaArrivo?.PezzoPresente?.Colore == this.Colore)
                     {
                         //questa voce causa fallimenti nei test precedenti quelli che non consideravano 
                         //le pedine nella scacchiera per farlo passare devo cancellare per forza i test

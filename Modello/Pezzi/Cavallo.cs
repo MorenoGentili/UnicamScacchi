@@ -8,6 +8,13 @@ namespace Scacchi.Modello.Pezzi {
         public Cavallo(Colore colore) : base(colore)
         {    
         }
+
+        
+        public override char Carattere {
+            get {
+                return Colore == Colore.Bianco ? '♞' : '♘';
+            }
+        }
         public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
@@ -16,6 +23,10 @@ namespace Scacchi.Modello.Pezzi {
             IEnumerable<ICasa> listaCase = null)
         {
             listaCase = listaCase??Enumerable.Empty<ICasa>();
+            if (!base.PuòMuovere(colonnaPartenza, traversaPartenza, colonnaArrivo, traversaArrivo, listaCase))
+                return false;
+
+
             ICasa casaPartenza = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaPartenza
             && casa.Traversa == traversaPartenza && casa.PezzoPresente == this);
             ICasa casaArrivo = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo && casa.Traversa == traversaArrivo);
