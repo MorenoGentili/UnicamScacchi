@@ -13,11 +13,12 @@ namespace Scacchi.Modello{
 
         public async void ScriviMossa(string mossa)
         {
-            DataBase db = new DataBase();
-            Mossa miaMossa = new Mossa();
-            miaMossa.Valore = mossa;
-            db.Mosse.Add(miaMossa);
-            await db.SaveChangesAsync();
+            using (DataBase db = new DataBase()){
+                Mossa miaMossa = new Mossa();
+                miaMossa.Valore = mossa;
+                db.Mosse.Add(miaMossa);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }
