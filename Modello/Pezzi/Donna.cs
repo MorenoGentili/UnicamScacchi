@@ -8,10 +8,6 @@ namespace Scacchi.Modello.Pezzi
     {
         public Donna(Colore colore) : base(colore)
         {
-<<<<<<< HEAD
-            this.colore = colore;    
-=======
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
         }
 
         public override char Carattere {

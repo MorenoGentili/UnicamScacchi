@@ -2,15 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-<<<<<<< HEAD
-namespace Scacchi.Modello.Pezzi {
-    public class Alfiere : IPezzo
-=======
 namespace Scacchi.Modello.Pezzi
 {
 
     public class Alfiere : Pezzo
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
     {
         public Alfiere(Colore colore) : base(colore)
         {
