@@ -50,6 +50,5 @@ namespace Scacchi.Tests
         Assert.Equal(2018, d1.Year);
         Assert.Equal(2017, d2.Year);
         }
-
     }
 }

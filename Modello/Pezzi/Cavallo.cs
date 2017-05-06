@@ -1,25 +1,37 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Cavallo : IPezzo
+    public class Cavallo : Pezzo
     {
-        private readonly Colore colore;
-        public Cavallo(Colore colore)
-        {
-            this.colore = colore;    
+        public Cavallo(Colore colore) : base(colore)
+        {    
         }
-        public Colore Colore {
+
+        
+        public override char Carattere {
             get {
-                return colore;
+                return Colore == Colore.Bianco ? '♞' : '♘';
             }
         }
-        public bool PuòMuovere(
+        public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
             Traversa traversaArrivo,
             IEnumerable<ICasa> listaCase = null)
         {
+            listaCase = listaCase??Enumerable.Empty<ICasa>();
+            if (!base.PuòMuovere(colonnaPartenza, traversaPartenza, colonnaArrivo, traversaArrivo, listaCase))
+                return false;
+
+
+            ICasa casaPartenza = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaPartenza
+            && casa.Traversa == traversaPartenza && casa.PezzoPresente == this);
+            ICasa casaArrivo = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo && casa.Traversa == traversaArrivo);
+            if(casaArrivo?.PezzoPresente?.Colore == this.Colore) {
+                return false;
+            }
             var differenzaColonne = colonnaPartenza - colonnaArrivo;
             var differenzaTraverse = (int) traversaPartenza - (int) traversaArrivo;
             if(differenzaTraverse == 2 || differenzaTraverse == -2){

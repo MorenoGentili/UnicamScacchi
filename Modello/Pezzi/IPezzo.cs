@@ -15,5 +15,6 @@ namespace Scacchi.Modello.Pezzi
             Traversa traversaArrivo,
             IEnumerable<ICasa> listaCase = null);
         Colore Colore { get; }
+        char Carattere { get; }
     }
 }

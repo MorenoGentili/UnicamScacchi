@@ -593,6 +593,9 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
+<<<<<<< HEAD
+
+=======
 
         [Fact]
         public void LAlfiereMuoveIndietroASinistradiUnaCasa()
@@ -610,6 +613,29 @@ namespace Scacchi.Modello
         }
 
 
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        [Fact]
+        public void LAlfiereMuoveIndietroASinistradiUnaCasa()
+        {
+            //Given
+            Alfiere alfiere = new Alfiere(Colore.Nero);
+            //When
+            bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+<<<<<<< HEAD
+            colonnaArrivo: Colonna.C,
+            traversaArrivo: Traversa.Quarta);
+=======
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Terza);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+            //Then
+            Assert.True(esito);
+        }
+
+
+<<<<<<< HEAD
         [Fact]
         public void LAlfiereMuoveIndietroASinstradiDueCase()
         {
@@ -626,6 +652,8 @@ namespace Scacchi.Modello
         }
 
 
+=======
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
         [Fact]
         public void LAlfiereMuoveIndietroASinistradiTreCase()
         {
@@ -1005,6 +1033,8 @@ namespace Scacchi.Modello
             traversaArrivo: Traversa.Quinta);
             //Then
             Assert.True(esito);
+<<<<<<< HEAD
+=======
         }
 
         [Fact]
@@ -1220,17 +1250,31 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void IlPedoneBiancoPuoMuovereDiagonalmenteSeCatturaUnPezzo()
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlPedonePuoMuovereDiagonalmenteSeCatturaUnPezzo(Colore colore)
         {
             //Given
-            var pedone = new Pedone(Colore.Bianco);
+            var pedone = new Pedone(colore);
+            Pedone pedoneNemico;
+            Traversa traversaInizio;
+            Traversa traversaArrivo;
+            if(colore == Colore.Bianco) {
+                traversaInizio = Traversa.Prima;
+                traversaArrivo = Traversa.Seconda;
+                pedoneNemico = new Pedone(Colore.Nero);
+            } else {
+                traversaInizio = Traversa.Settima;
+                traversaArrivo = Traversa.Sesta;
+                pedoneNemico = new Pedone(Colore.Bianco);
+            }
             IEnumerable<ICasa> listaCase = new List<Casa>{
-            new Casa(Colonna.A,Traversa.Prima){
+            new Casa(Colonna.A,traversaInizio){
                 PezzoPresente = pedone
             },
-            new Casa(Colonna.B,Traversa.Seconda){
-                PezzoPresente = new Pedone(Colore.Nero)
+            new Casa(Colonna.B,traversaArrivo){
+                PezzoPresente = pedoneNemico
             }
         };
 
@@ -1238,13 +1282,14 @@ namespace Scacchi.Modello
 
             bool esito = pedone.PuòMuovere(
                 colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Prima,
+                traversaPartenza: traversaInizio,
                 colonnaArrivo: Colonna.B,
-                traversaArrivo: Traversa.Seconda,
+                traversaArrivo: traversaArrivo,
                 listaCase: listaCase
             );
             //Then
             Assert.True(esito);
+
         }
         [Fact]
         public void IlPedoneNonPuoMuovereSeHaQualcunoDavanti()
@@ -1271,19 +1316,34 @@ namespace Scacchi.Modello
             Assert.False(esito);
         }
 
-
-        [Fact]
-        public void SePedoneNeroCasaInizialePuoMuovereDiDueCase()
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlPedonePuòMuovereAvantiDiDueCase(Colore colore)
         {
-            //Given
-            Pedone pedone = new Pedone(Colore.Nero);
-            //When
-            bool esito = pedone.PuòMuovere(
-                    colonnaPartenza: Colonna.A,
-                    traversaPartenza: Traversa.Settima,
-                    colonnaArrivo: Colonna.A,
-                    traversaArrivo: Traversa.Quinta);
+        //Given
+        var pedone = new Pedone(colore);
+        //When
+        Traversa traversaInizio;
+        Traversa traversaFine;
+        if(colore == Colore.Nero) {
+            traversaInizio = Traversa.Settima;
+            traversaFine = Traversa.Quinta;
+        } else {
+            traversaInizio = Traversa.Seconda;
+            traversaFine = Traversa.Quarta;
         }
+        bool result = pedone.PuòMuovere(
+            Colonna.A,
+            traversaInizio,
+            Colonna.A,
+            traversaFine
+        );
+        //Then
+        Assert.True(result);
+
+        }
+
         [Fact]
         public void IlPedoneNonPuoMuovereDiDueCaseInAvantiSeCaseNelPercorsoSonoOccupate()
         {
@@ -1298,6 +1358,944 @@ namespace Scacchi.Modello
             },
             new Casa(Colonna.A, Traversa.Quarta)
         };
+            //When
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Seconda,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Quarta,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+        }
+
+        [Fact]
+        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoObliquo()
+        {
+            //Given
+            var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Seconda){
+                //metto il pedone bianco simulando l'inizio della partita
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.G, Traversa.Terza)
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaNonPuòSpostarsiInObliquoUnaCasaConUnPezzoBianco()
+        {
+        var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Seconda),
+            new Casa(Colonna.G, Traversa.Terza){
+                //metto il pedone bianco in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaPuòSposarsiInObliquoInUnaCasellaConUnPezzoNero()
+        {
+          var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Seconda),
+            new Casa(Colonna.G, Traversa.Terza){
+                //metto il pedone nero in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.True(esito);
+        }
+
+
+
+         [Fact]
+        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoOrizzontale()
+        {
+            //Given
+            var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Prima){
+                //metto il pedone bianco simulando l'inizio della partita
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.G, Traversa.Prima)
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Prima,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaNonPuòSpostarsiInOrizzontaleInUnaCasaConUnPezzoBianco()
+        {
+        var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Prima),
+            new Casa(Colonna.G, Traversa.Prima){
+                //metto il pedone bianco in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Prima,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+        [Fact]
+        public void LaDonnaBiancaPuòSposarsiInOrizzontaleInUnaCasellaConUnPezzoNero()
+        {
+          var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+            },
+            new Casa(Colonna.F,Traversa.Prima),
+            new Casa(Colonna.G, Traversa.Prima){
+                //metto il pedone nero in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Prima,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.True(esito);
+        }
+
+        public void LAlfiereNonPuoMuovereInAvantiADestraSeCaseNelPercorsoSonoOccupate()
+        {
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.F,Traversa.Sesta){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.H, Traversa.Ottava)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.H,
+            traversaArrivo: Traversa.Ottava,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+        }
+
+        [Fact]
+        public void LAlfiereNonPuoMuovereInAvantiASinistraSeCaseNelPercorsoSonoOccupate()
+        {
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.C,Traversa.Quinta){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.A, Traversa.Settima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfiereNonPuoMuovereIndietroADestraSeCaseNelPercorsoSonoOccupate()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.F,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.D,
+            traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.F,Traversa.Seconda){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.G, Traversa.Prima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.G,
+            traversaArrivo: Traversa.Prima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfiereNonPuoMuovereIndietroASinistraSeCaseNelPercorsoSonoOccupate()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.F,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.H,
+            traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.C,Traversa.Terza){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.A, Traversa.Prima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Prima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfierePuòMuovereIndietroASinistraSeCaseNonNelPercorsoSonoOccupate()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.F,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.E,Traversa.Quinta){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.A, Traversa.Prima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Prima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.True(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfierePuoMuovereInAvantiADestraSeCaseNonNelPercorsoSonoOccupate()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.F,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.H,Traversa.Ottava){
+                PezzoPresente = new Pedone(Colore.Nero)
+            },
+            new Casa(Colonna.G, Traversa.Settima)
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.G,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.True(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfiereNonPuoMuovereInAvantiASinistraSeLaCasaÈOccupataDaUnPezzoDelloStessoColore()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Bianco);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.F,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.F,
+            traversaArrivo: Traversa.Quinta);
+            //Then
+            Assert.False(esito);
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.A,Traversa.Settima){
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        //Then
+        Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LAlfierePuoMuovereInAvantiASinistraSeLaCasaÈOccupataDaUnPezzoDiDiversoColore()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.F,
+            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+        }
+
+
+        [Fact]
+        public void LaDonnaMuoveAvantiADestradiTreCase()
+        {
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.G,
+            traversaArrivo: Traversa.Ottava);
+            //Then
+            Assert.True(esito);
+        }
+
+        [Fact]
+        public void LaDonnaMuoveAvantiASinistradiDueCase()
+        {
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Settima);
+            //Then
+            Assert.True(esito);
+        }
+
+
+=======
+        //Given
+        var alfiere = new Alfiere(Colore.Bianco);
+        IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.D,Traversa.Quarta){
+                PezzoPresente = alfiere
+            },
+            new Casa(Colonna.A,Traversa.Settima){
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+        //When
+        bool esito = alfiere.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quarta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Settima,
+            listaCase: listaCase
+        );
+        }
+          
+        public void IlCavalloPuòScavalcareIPezziNelMovimentoAL()
+        {
+        //Given
+        Cavallo cavallo = new Cavallo(Colore.Bianco);
+         IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.A,Traversa.Seconda){
+                PezzoPresente = cavallo
+            },
+            new Casa(Colonna.B,Traversa.Terza){
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.C, Traversa.Terza)
+        };
+        //When
+         bool esito = cavallo.PuòMuovere(
+            colonnaPartenza: Colonna.A,
+            traversaPartenza: Traversa.Seconda,
+            colonnaArrivo: Colonna.C,
+            traversaArrivo: Traversa.Terza,
+            listaCase: listaCase
+        );        
+        //Then
+        Assert.True(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void ilCavalloNonPuòMuoversiInCaseConPezziDelloStessoColoreSeDiversoLoCattura(Colore colore)
+        {
+            //Given
+            Cavallo cavallo = new Cavallo(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A,Traversa.Seconda){
+                    PezzoPresente = cavallo
+                },
+                new Casa(Colonna.B,Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Bianco)
+                },
+                new Casa(Colonna.C, Traversa.Terza) {
+                    PezzoPresente = new Pedone(colore)
+                }
+            };
+            //When
+            bool esito = cavallo.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Seconda,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );        
+            //Then
+            if(colore == cavallo.Colore)
+                Assert.False(esito);
+            else
+                Assert.True(esito);
+        }
+
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        [Fact]
+        public void LaTorreNonPuòScavalcareNelMovimentoOrizzontale()
+        {
+            //Given
+<<<<<<< HEAD
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Ottava);
+            //Then
+            Assert.True(esito);
+=======
+            var torre =  new Torre(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Nero)
+                },
+                new Casa(Colonna.C, Traversa.Terza)
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LaTorreNonPuòScavalcareNelMovimentoVerticale()
+        {
+            //Given
+<<<<<<< HEAD
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.F,
+            traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
+
+
+=======
+            var torre =  new Torre(Colore.Bianco);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta){
+                        PezzoPresente = new Pedone(Colore.Nero)
+                    },
+                    new Casa(Colonna.A, Traversa.Quinta)
+                };
+            //When
+            bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+            //Then
+            Assert.False(esito);
+        }
+
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        [Fact]
+        public void LaTorrePuoMuovereInVerticaleSuUnaScacchieraEMangiare()
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.G,
+            traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var torre =  new Torre(Colore.Bianco);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta),
+                    new Casa(Colonna.A, Traversa.Quinta){
+                        PezzoPresente = new Pedone(Colore.Nero)
+                    }
+                };
+        //When
+        bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+        //Then
+        Assert.True(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        [Fact]
+        public void LaTorrePuoMuovereInOrizzontaleSuUnaScacchieraEMangiare()
+        {
+            //Given
+<<<<<<< HEAD
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.H,
+            traversaArrivo: Traversa.Prima);
+=======
+            var torre =  new Torre(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza),
+                new Casa(Colonna.C, Traversa.Terza){
+                    PezzoPresente = new Pedone(Colore.Nero)
+                }
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+            //Then
+            Assert.True(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuoMangiareUnPezzoDelloStessoColoreInVerticale(Colore c)
+        {
+<<<<<<< HEAD
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.B,
+            traversaArrivo: Traversa.Terza);
+            //Then
+            Assert.True(esito);
+        }
+
+
+        [Fact]
+        public void LaDonnaMuoveIndietroASinistradiTreCase()
+        {
+            //Given
+            Donna donna = new Donna(Colore.Nero);
+            //When
+            bool esito = donna.PuòMuovere(
+            colonnaPartenza: Colonna.D,
+            traversaPartenza: Traversa.Quinta,
+            colonnaArrivo: Colonna.A,
+            traversaArrivo: Traversa.Seconda);
+            //Then
+            Assert.True(esito);
+=======
+        //Given
+        var torre =  new Torre(c);
+                IEnumerable<ICasa> listaCase = new List<Casa> {
+                    new Casa(Colonna.A, Traversa.Terza){
+                        PezzoPresente = torre
+                    },
+                    new Casa(Colonna.A, Traversa.Quarta),
+                    new Casa(Colonna.A, Traversa.Quinta){
+                        PezzoPresente = new Pedone(c)
+                    }
+                };
+        //When
+        bool esito = torre.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Terza,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta,
+                    listaCase: listaCase
+                );
+        //Then
+        Assert.False(esito);
+        }
+
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuoMangiareUnPezzoDelloStessoColoreInOrizzontale(Colore c)
+        {
+            //Given
+            var torre =  new Torre(c);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+                new Casa(Colonna.A, Traversa.Terza){
+                    PezzoPresente = torre
+                },
+                new Casa(Colonna.B, Traversa.Terza),
+                new Casa(Colonna.C, Traversa.Terza){
+                    PezzoPresente = new Pedone(c)
+                }
+            };
+            //When
+            bool esito = torre.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Terza,
+                colonnaArrivo: Colonna.C,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+
+        
+
+        
+
+
+         [Fact]
+        public void LaDonnaBiancaNonPuòScavalcareAltriPezziColSuoMovimentoVerticale()
+        {
+            //Given
+<<<<<<< HEAD
+            var pedone = new Pedone(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa>{
+            new Casa(Colonna.A,Traversa.Prima){
+                PezzoPresente = pedone
+=======
+            var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+            },
+            new Casa(Colonna.E,Traversa.Seconda){
+                //metto il pedone bianco simulando l'inizio della partita
+                PezzoPresente = new Pedone(Colore.Bianco)
+            },
+            new Casa(Colonna.E, Traversa.Terza)
+        };
+<<<<<<< HEAD
+
+            //When
+
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.B,
+                traversaArrivo: Traversa.Seconda,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.True(esito);
+=======
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        }
+        [Fact]
+        public void LaDonnaBiancaNonPuòSpostarsiInVerticaleInUnaCasaConUnPezzoBianco()
+        {
+<<<<<<< HEAD
+            //Given
+            var pedone = new Pedone(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.A,Traversa.Prima){
+                PezzoPresente = pedone
+=======
+        var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+            },
+            new Casa(Colonna.E,Traversa.Seconda),
+            new Casa(Colonna.E, Traversa.Terza){
+                //metto il pedone bianco in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Bianco)
+            }
+        };
+<<<<<<< HEAD
+            //When
+            bool esito = pedone.PuòMuovere(
+                colonnaPartenza: Colonna.A,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.A,
+                traversaArrivo: Traversa.Seconda,
+                listaCase: listaCase
+            );
+            //Then
+            Assert.False(esito);
+        }
+
+
+        [Fact]
+        public void SePedoneNeroCasaInizialePuoMuovereDiDueCase()
+        {
+            //Given
+            Pedone pedone = new Pedone(Colore.Nero);
+            //When
+            bool esito = pedone.PuòMuovere(
+                    colonnaPartenza: Colonna.A,
+                    traversaPartenza: Traversa.Settima,
+                    colonnaArrivo: Colonna.A,
+                    traversaArrivo: Traversa.Quinta);
+        }
+=======
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.E,
+                traversaArrivo: Traversa.Terza,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.False(esito);
+        }
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+        [Fact]
+        public void LaDonnaBiancaPuòSposarsiInVerticaleInUnaCasellaConUnPezzoNero()
+        {
+<<<<<<< HEAD
+            //Given
+            var pedone = new Pedone(Colore.Bianco);
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.A,Traversa.Seconda){
+                PezzoPresente = pedone
+            },
+            new Casa(Colonna.A,Traversa.Terza){
+                PezzoPresente = new Pedone(Colore.Bianco)
+=======
+          var donna = new Donna(Colore.Bianco);
+            //When
+            IEnumerable<ICasa> listaCase = new List<Casa> {
+            new Casa(Colonna.E,Traversa.Prima){
+                PezzoPresente = donna
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
+            },
+            new Casa(Colonna.E,Traversa.Seconda),
+            new Casa(Colonna.E, Traversa.Terza){
+                //metto il pedone nero in un posto obliquo alla posizione della regina
+                PezzoPresente = new Pedone(Colore.Nero)
+            }
+        };
+<<<<<<< HEAD
             //When
             bool esito = pedone.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -1441,5 +2439,19 @@ namespace Scacchi.Modello
             Assert.True(esito);
             Assert.False(caso);
         }
+=======
+            //Then
+            //When
+            bool esito = donna.PuòMuovere(
+                colonnaPartenza: Colonna.E,
+                traversaPartenza: Traversa.Prima,
+                colonnaArrivo: Colonna.G,
+                traversaArrivo: Traversa.Prima,
+                listaCase: listaCase
+            );
+             //Then
+            Assert.True(esito);
+        }
+>>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
     }
 }

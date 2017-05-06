@@ -2,25 +2,28 @@ using System;
 using System.Collections.Generic;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Re : IPezzo
+    public class Re : Pezzo
     {
         private readonly Colore colore;
-        public Re(Colore colore)
+        public Re(Colore colore) : base(colore)
         {
             this.colore = colore;    
         }
-        public Colore Colore {
+        public override char Carattere {
             get {
-                return colore;
+                return Colore == Colore.Bianco ?  '♚' : '♔';
             }
         }
-        public bool PuòMuovere(
+        public override bool PuòMuovere(
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
             Traversa traversaArrivo, 
             IEnumerable<ICasa> listaCase = null)
         {
+            bool mossaPossibile = base.PuòMuovere(colonnaPartenza,traversaPartenza,colonnaArrivo,traversaArrivo,listaCase);
+            if (!mossaPossibile)
+                return false;
             var differenzaColonne = colonnaPartenza - colonnaArrivo;
             var differenzaTraverse = (int) traversaPartenza - (int) traversaArrivo;
             if (differenzaColonne == 0 && differenzaTraverse == 0)
