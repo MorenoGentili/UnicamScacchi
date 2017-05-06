@@ -611,7 +611,7 @@ namespace Scacchi.Modello
 
 
         [Fact]
-        public void LAlfiereMuoveIndietroASinistradiUnaCasa()
+        public void LAlfiereMuoveIndietroASinistradiUnaCasa1()
         {
             //Given
             Alfiere alfiere = new Alfiere(Colore.Nero);
