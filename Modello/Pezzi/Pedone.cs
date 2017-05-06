@@ -4,23 +4,10 @@ using System.Linq;
 
 namespace Scacchi.Modello.Pezzi
 {
-<<<<<<< HEAD
-    public class Pedone : IPezzo
-=======
     public class Pedone : Pezzo
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
     {
         public Pedone(Colore colore) : base(colore)
         {
-<<<<<<< HEAD
-            this.colore = colore;
-        }
-        public Colore Colore
-        {
-            get
-            {
-                return colore;
-=======
             if (colore == Colore.Bianco)
                 traversaInizio = Traversa.Seconda;
             else
@@ -30,7 +17,6 @@ namespace Scacchi.Modello.Pezzi
         public override char Carattere {
             get {
                 return Colore == Colore.Bianco ? '♟' : '♙';
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
             }
         }
 
@@ -55,19 +41,6 @@ namespace Scacchi.Modello.Pezzi
             Traversa traversaArrivo,
             IEnumerable<ICasa> listaCase = null)
         {
-<<<<<<< HEAD
-            // nel caos il pedone si vuole muovere nella stessa colonna
-
-            listaCase = listaCase ?? Enumerable.Empty<ICasa>();
-
-            ICasa casaPartenza = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaPartenza
-            && casa.Traversa == traversaPartenza
-            && casa.PezzoPresente == this);
-            if ((this.colore == Colore.Bianco
-                 && colonnaArrivo - colonnaPartenza == 1
-                 && traversaArrivo - traversaPartenza == 1) || (this.colore == Colore.Nero
-                 && colonnaPartenza - colonnaArrivo == 1
-=======
             bool puòMuovere = base.PuòMuovere(colonnaPartenza, traversaPartenza, colonnaArrivo, traversaArrivo, listaCase);
             if (!puòMuovere)
                 return false;
@@ -82,27 +55,10 @@ namespace Scacchi.Modello.Pezzi
                  && Math.Abs(colonnaArrivo - colonnaPartenza) == 1
                  && traversaArrivo - traversaPartenza == 1) || (this.Colore == Colore.Nero
                  && Math.Abs(colonnaPartenza - colonnaArrivo) == 1
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
                  && traversaPartenza - traversaArrivo == 1))
             {
                 ICasa casaArrivo = listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo
                && casa.Traversa == traversaArrivo);
-<<<<<<< HEAD
-                if (casaArrivo.PezzoPresente.Colore != this.colore) return true;
-            }
-            var stessaColonna = colonnaPartenza == colonnaArrivo;
-
-            var distanzaTraLeTraverse = (int)(traversaArrivo - traversaPartenza);
-
-            if (this.colore == Colore.Nero)
-            {
-                if (stessaColonna && distanzaTraLeTraverse == -2 && traversaPartenza == Traversa.Settima)
-                {
-                    return true;
-                }
-                if (stessaColonna && distanzaTraLeTraverse == -1)
-                {
-=======
                 if (casaArrivo?.PezzoPresente?.Colore != this.Colore)
                     return true;
             }
@@ -123,15 +79,11 @@ namespace Scacchi.Modello.Pezzi
             {
                 if (listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo
                     && casa.Traversa == traversaArrivo)?.PezzoPresente == null)
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
                     return true;
                 }
                 else
                 {
                     return false;
-<<<<<<< HEAD
-                }
-=======
 
             }
             //Avanzamento del pedone di due caselle
@@ -154,7 +106,6 @@ namespace Scacchi.Modello.Pezzi
                 }
             } else {
                 return false;
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
             }
             if (this.colore == Colore.Bianco)
             {

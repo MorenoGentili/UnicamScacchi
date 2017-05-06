@@ -12,12 +12,6 @@ namespace Scacchi
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            SimpleXUnitRunner.SimpleXUnit.RunTests();
-
-            Console.ReadKey();
-         
-=======
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             //Console.SetWindowSize(100, 30);
             //SimpleXUnitRunner.SimpleXUnit.RunTests();
@@ -117,7 +111,6 @@ namespace Scacchi
                 return $"{pezzoGiocabile.Colonna}{(int) pezzoGiocabile.Traversa} {destinazioneScelta.Colonna}{(int) destinazioneScelta.Traversa}";
             }
             return "";
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
         }
 
         /*var pedone1 = new Pedone(Colore.Bianco);
@@ -150,15 +143,11 @@ namespace Scacchi
             .Case
             .ConPezzi(Colore.Bianco)
             .DiTipo<Pedone>();*/
-<<<<<<< HEAD
-
-=======
         /*
         private static void NotificaSconfitta(object sender, Colore colore)
         {
             Console.WriteLine($"(Dal metodo): Il giocatore {colore} ha perso la partita, secondo l'orologio {sender}!");
         }
         */
->>>>>>> 61b3805c943602fbd9c12831296fd3405e55d23b
     }
 }
