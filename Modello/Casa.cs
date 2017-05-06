@@ -1,4 +1,3 @@
-using System;
 using Scacchi.Modello.Pezzi;
 
 namespace Scacchi.Modello
