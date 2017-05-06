@@ -107,7 +107,7 @@ namespace Scacchi.Modello.Pezzi
                 } else {
                     return false;
                 }
-            if (this.colore == Colore.Bianco)
+            if (this.Colore == Colore.Bianco)
             {
                 if (stessaColonna && distanzaTraLeTraverse == 2 && traversaPartenza == Traversa.Seconda)
                 {
