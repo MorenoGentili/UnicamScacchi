@@ -79,34 +79,34 @@ namespace Scacchi.Modello.Pezzi
             {
                 if (listaCase.SingleOrDefault(casa => casa.Colonna == colonnaArrivo
                     && casa.Traversa == traversaArrivo)?.PezzoPresente == null)
+                    {
                     return true;
-                }
-                else
-                {
+                    }
+                else{
                     return false;
-
-            }
-            //Avanzamento del pedone di due caselle
-            else if(primaMossa && stessaColonna && Math.Abs(distanzaTraLeTraverse) == 2) {
-                try {
-                    //Vedo se trovo un pezzo all'interno della casa tra quella di 
-                    //partenza e quella di arrivo. Se la trovo il pedone non si muove
-                    listaCase.Single((casa) =>
-                     (this.Colore == Colore.Bianco &&
-                     casa.Traversa < traversaArrivo
-                     && casa.Traversa > traversaPartenza 
-                     && casa.PezzoPresente != null) ||
-                     (this.Colore == Colore.Nero &&
-                     casa.Traversa < traversaPartenza &&
-                     casa.Traversa > traversaArrivo &&
-                     casa.PezzoPresente != null));
-                    return false;
-                } catch (InvalidOperationException ex) {
-                    return true;
                 }
-            } else {
-                return false;
             }
+                //Avanzamento del pedone di due caselle
+                else if(primaMossa && stessaColonna && Math.Abs(distanzaTraLeTraverse) == 2) {
+                    try {
+                        //Vedo se trovo un pezzo all'interno della casa tra quella di 
+                        //partenza e quella di arrivo. Se la trovo il pedone non si muove
+                        listaCase.Single((casa) =>
+                        (this.Colore == Colore.Bianco &&
+                        casa.Traversa < traversaArrivo
+                        && casa.Traversa > traversaPartenza 
+                        && casa.PezzoPresente != null) ||
+                        (this.Colore == Colore.Nero &&
+                        casa.Traversa < traversaPartenza &&
+                        casa.Traversa > traversaArrivo &&
+                        casa.PezzoPresente != null));
+                        return false;
+                    } catch (InvalidOperationException ex) {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
             if (this.colore == Colore.Bianco)
             {
                 if (stessaColonna && distanzaTraLeTraverse == 2 && traversaPartenza == Traversa.Seconda)
